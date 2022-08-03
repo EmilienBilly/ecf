@@ -17,6 +17,34 @@ router.get("/", async (req, res) => {
     }
 });
 
+router.get("/active", async (req, res) => {
+    try {
+        const results = await database.query("SELECT * FROM partners WHERE partner_active = TRUE;");
+        res.json({
+            data: {
+                partners: results.rows,
+            },
+        });
+        console.log(results);
+    } catch (err) {
+        console.error(err);
+    }
+});
+
+router.get("/inactive", async (req, res) => {
+    try {
+        const results = await database.query("SELECT * FROM partners WHERE partner_active = FALSE;");
+        res.json({
+            data: {
+                partners: results.rows,
+            },
+        });
+        console.log(results);
+    } catch (err) {
+        console.error(err);
+    }
+});
+
 router.get("/:id", async (req, res) => {
     try {
         const results = await database.query(
@@ -34,7 +62,5 @@ router.get("/:id", async (req, res) => {
         console.log(error);
     }
 });
-
-router.get("/", async (req, res) => {});
 
 module.exports = router;
