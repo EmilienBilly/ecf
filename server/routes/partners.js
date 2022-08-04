@@ -80,4 +80,21 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+router.put("/:id", async (req, res) => {
+    try {
+        const results = await database.query(
+            "UPDATE partners SET partner_name = $1, partner_logo_url = $2, partner_email = $3, partner_password = $4, partner_active = $5 WHERE id = $6 returning *;",
+            [req.body.name, req.body.logo, req.body.email, req.body.password, req.body.active, req.params.id]
+        );
+        res.status(200).json({
+            status: "success",
+            data: {
+                partner: results.rows[0],
+            },
+        });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
 module.exports = router;
