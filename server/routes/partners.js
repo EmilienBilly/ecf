@@ -3,6 +3,23 @@ const database = require("../db");
 
 const router = express.Router();
 
+router.post("/", async (req, res) => {
+    try {
+        const results = await database.query(
+            "INSERT INTO partners (partner_name, partner_logo_url, partner_email, partner_password, partner_active) values ($1, $2, $3, $4, $5) returning *",
+            [req.body.name, req.body.logo, req.body.email, req.body.password, req.body.active]
+        );
+        res.status(201).json({
+            status: "success",
+            data: {
+                partner: results.rows[0],
+            },
+        });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
 router.get("/", async (req, res) => {
     try {
         const results = await database.query("SELECT * FROM partners;");
