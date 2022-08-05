@@ -62,11 +62,11 @@ router.get("/inactive", async (req, res) => {
     }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:userId", async (req, res) => {
     try {
         const results = await database.query(
             "SELECT structures.*, partners.partner_name FROM structures JOIN partners ON structures.partner_id = partners.id AND partners.id = $1;",
-            [req.params.id]
+            [req.params.userId]
         );
         res.json({
             data: {
@@ -80,11 +80,11 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:userId", async (req, res) => {
     try {
         const results = await database.query(
             "UPDATE partners SET partner_name = $1, partner_logo_url = $2, partner_email = $3, partner_password = $4, partner_active = $5 WHERE id = $6 returning *;",
-            [req.body.name, req.body.logo, req.body.email, req.body.password, req.body.active, req.params.id]
+            [req.body.name, req.body.logo, req.body.email, req.body.password, req.body.active, req.params.userId]
         );
         res.status(200).json({
             status: "success",
@@ -94,6 +94,20 @@ router.put("/:id", async (req, res) => {
         });
     } catch (err) {
         console.log(err);
+    }
+});
+
+router.get("/:partnerId/:structureId", async (req, res) => {
+    try {
+        const results = await database.query("SELECT * FROM structures WHERE partner_id = $1 AND id = $2", [req.params.partnerId, req.params.structureId]);
+        res.json({
+            data: {
+                structure: results.rows[0],
+            },
+        });
+        console.log(results);
+    } catch (error) {
+        console.log(error);
     }
 });
 
