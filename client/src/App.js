@@ -1,8 +1,13 @@
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import Partners from "./pages/Partners";
+
 function App() {
     return (
-        <div>
-            <h1>Hello World</h1>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Partners />} />
+            </Routes>
+        </BrowserRouter>
     );
 }
 

@@ -24,9 +24,7 @@ router.get("/", async (req, res) => {
     try {
         const results = await database.query("SELECT * FROM partners;");
         res.json({
-            data: {
-                partners: results.rows,
-            },
+            partners: results.rows,
         });
         console.log(results);
     } catch (error) {
@@ -38,9 +36,7 @@ router.get("/active", async (req, res) => {
     try {
         const results = await database.query("SELECT * FROM partners WHERE partner_active = TRUE;");
         res.json({
-            data: {
-                partners: results.rows,
-            },
+            partners: results.rows,
         });
         console.log(results);
     } catch (err) {
@@ -52,9 +48,7 @@ router.get("/inactive", async (req, res) => {
     try {
         const results = await database.query("SELECT * FROM partners WHERE partner_active = FALSE;");
         res.json({
-            data: {
-                partners: results.rows,
-            },
+            partners: results.rows,
         });
         console.log(results);
     } catch (err) {
@@ -69,10 +63,8 @@ router.get("/:userId", async (req, res) => {
             [req.params.userId]
         );
         res.json({
-            data: {
-                partner: results.rows[0].partner_name,
-                structures: results.rows,
-            },
+            partner: results.rows[0].partner_name,
+            structures: results.rows,
         });
         console.log(results);
     } catch (error) {
@@ -88,9 +80,7 @@ router.put("/:userId", async (req, res) => {
         );
         res.status(200).json({
             status: "success",
-            data: {
-                partner: results.rows[0],
-            },
+            partner: results.rows[0],
         });
     } catch (err) {
         console.log(err);
@@ -101,9 +91,7 @@ router.get("/:partnerId/:structureId", async (req, res) => {
     try {
         const results = await database.query("SELECT * FROM structures WHERE partner_id = $1 AND id = $2", [req.params.partnerId, req.params.structureId]);
         res.json({
-            data: {
-                structure: results.rows[0],
-            },
+            structure: results.rows[0],
         });
         console.log(results);
     } catch (error) {
