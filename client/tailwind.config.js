@@ -4,8 +4,8 @@ module.exports = {
     theme: {
         extend: {
             backgroundColor: {
-                "main-bg": "#FAFBFB",
-                "main-dark-bg": "#20232A",
+                "main-bg": "#F5F5F5",
+                "main-dark-bg": "#424B54",
                 "secondary-dark-bg": "#33373E",
                 "light-gray": "#F7F7F7",
                 "half-transparent": "rgba(0, 0, 0, 0.5)",

@@ -18,7 +18,6 @@ const List = () => {
                     <table class="table-auto w-full">
                         <thead className="text-sm text-gray-700 uppercase">
                             <tr>
-                                <th></th>
                                 <th className="font-normal">Id</th>
                                 <th className="font-normal">Nom</th>
                                 <th className="font-normal">Email</th>
@@ -28,7 +27,6 @@ const List = () => {
                         <tbody>
                             {partners.map((partner, index) => (
                                 <tr key={index} className="text-center font-medium text-xs sm:text-lg h-14 shadow hover:bg-light-gray active:bg-light-gray">
-                                    <td>{partner.partner_logo_url}</td>
                                     <td>{partner.id}</td>
                                     <td>{partner.partner_name}</td>
                                     <td>{partner.partner_email}</td>

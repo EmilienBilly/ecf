@@ -1,8 +1,11 @@
+import { useState } from "react";
 import Navbar from "../components/Navbar";
 import List from "../components/List";
 import PageTitle from "../components/PageTitle";
+import Modal from "../components/Modal";
 
 const Partners = () => {
+    const [openModal, setOpenModal] = useState(false);
     return (
         <>
             <div className="flex relative bg-main-bg mx-auto">
@@ -12,9 +15,15 @@ const Partners = () => {
                         <div className="flex justify-between mb-16">
                             <PageTitle title="Partenaires" />
                             <div>
-                                <button type="button" className="align-self-center font-semibold text-white bg-teal-600 px-4 py-2 rounded shadow">
+                                <button
+                                    type="button"
+                                    className="align-self-center font-semibold text-white bg-teal-600 px-4 py-2 rounded shadow"
+                                    onClick={() => {
+                                        setOpenModal(true);
+                                    }}>
                                     Ajouter
                                 </button>
+                                {openModal && <Modal />}
                             </div>
                         </div>
                         <List />
