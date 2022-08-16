@@ -9,7 +9,7 @@ const Partners = () => {
     return (
         <>
             {openModal}
-            <div className="lg:flex min-h-screen w-mini-screen bg-main-bg relative z-0">
+            <div className="lg:flex min-h-screen bg-main-bg relative z-0 overflow-auto">
                 <Navbar />
                 <div className="lg:flex-grow">
                     <div className="flex items-center px-3">
