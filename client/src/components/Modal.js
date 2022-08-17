@@ -1,4 +1,5 @@
-const Modal = () => {
+const Modal = ({ open, onClose }) => {
+    if (!open) return null;
     return (
         <>
             <div className="bg-half-transparent fixed inset-0 z-50">
@@ -17,7 +18,9 @@ const Modal = () => {
                                 </select>
                                 <div className="flex justify-center">
                                     <button className="px-4 py-2 rounded bg-primary-button text-white">Ajouter</button>
-                                    <button className="px-4 ml-4 rounded bg-secondary-button text-white">Annuler</button>
+                                    <button className="px-4 ml-4 rounded bg-secondary-button text-white" onClick={onClose}>
+                                        Annuler
+                                    </button>
                                 </div>
                             </form>
                         </div>

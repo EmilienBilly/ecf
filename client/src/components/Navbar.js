@@ -12,7 +12,7 @@ const Navbar = () => {
                     </svg>
                 </button>
             ) : (
-                <nav className="+translate-y-full absolute inset-0 lg:relative z-10 w-80 lg:w-64 text-white h-screen bg-teal-700 p-3">
+                <nav className="+translate-y-full absolute inset-0 lg:relative z-10 w-64 lg:w-64 text-white h-screen bg-teal-700 p-3">
                     <div>
                         <div className="flex justify-between">
                             <span className="font-bold text-2xl sm:text-3xl p-2">One Gym</span>

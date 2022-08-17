@@ -8,7 +8,6 @@ const Partners = () => {
     const [openModal, setOpenModal] = useState(false);
     return (
         <>
-            {openModal}
             <div className="lg:flex min-h-screen bg-main-bg relative z-0 overflow-auto">
                 <Navbar />
                 <div className="lg:flex-grow">
@@ -18,9 +17,7 @@ const Partners = () => {
                             <button
                                 type="button"
                                 className="align-self-center font-semibold text-white bg-primary-button px-4 py-2 rounded shadow"
-                                onClick={() => {
-                                    setOpenModal(true);
-                                }}>
+                                onClick={() => setOpenModal(true)}>
                                 Ajouter
                             </button>
                         </div>
@@ -28,7 +25,7 @@ const Partners = () => {
                     <List />
                 </div>
             </div>
-            {openModal && <Modal />}
+            <Modal open={openModal} onClose={() => setOpenModal(false)} />
         </>
     );
 };
