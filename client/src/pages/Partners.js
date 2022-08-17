@@ -6,6 +6,7 @@ import Modal from "../components/Modal";
 
 const Partners = () => {
     const [openModal, setOpenModal] = useState(false);
+
     return (
         <>
             <div className="lg:flex min-h-screen bg-main-bg relative z-0 overflow-auto">
