@@ -1,35 +1,27 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import axios from "../api/axios";
 import { PartnersContext } from "../context/PartnersContext";
 import { useForm } from "react-hook-form";
 
 const Modal = ({ open, onClose }) => {
+    const { addPartners } = useContext(PartnersContext);
     const {
         handleSubmit,
         register,
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => console.log(data);
-
-    const { addPartners } = useContext(PartnersContext);
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [active, setActive] = useState(true);
-
-    const formSubmit = async (e) => {
-        // Avoid reloading the page and losing our state
-        e.preventDefault();
+    const onSubmit = async (data) => {
+        console.log(data);
         try {
             const response = await axios.post("/", {
-                name: name,
-                email: email,
-                password: password,
-                active: active,
+                name: data.name,
+                email: data.email,
+                password: data.password,
+                active: data.active,
             });
             //Function created in the context to add the newly added partner into partners state
-            addPartners(response.data.data.partner[0]);
+            addPartners(response.data.data.partner);
             console.log(response);
             onClose();
         } catch (err) {}
@@ -45,10 +37,13 @@ const Modal = ({ open, onClose }) => {
                         <span className="text-center mb-4 font-semibold">Ajouter un partenaire</span>
                         <div className="flex flex-col">
                             <form className="flex flex-col text-md" onSubmit={handleSubmit(onSubmit)}>
-                                <input className="mb-4 p-2 bg-main-bg rounded" type="text" placeholder="Nom" {...register("name")} />
-                                <input value={email} className="mb-4 p-2 bg-main-bg rounded" type="text" placeholder="Email" {...register("email")} />
-                                <input value={password} className="mb-4 p-2 bg-main-bg rounded" type="text" placeholder="Mot de passe" {...register("password")} />
-                                <select value={active} className="mb-4 p-2 bg-main-bg rounded" name="status" id="status-select" {...register("active")}>
+                                <input className="mb-4 p-2 bg-main-bg rounded" type="text" placeholder="Nom" {...register("name", { required: true })} />
+                                {errors.name && <p className="text-red-500">Veuillez choisir un nom</p>}
+                                <input className="mb-4 p-2 bg-main-bg rounded" type="text" placeholder="Email" {...register("email", { required: true })} />
+                                {errors.email && <p className="text-red-500">Veuillez choisir une adresse email</p>}
+                                <input className="mb-4 p-2 bg-main-bg rounded" type="text" placeholder="Mot de passe" {...register("password", { required: true })} />
+                                {errors.password && <p className="text-red-500">Veuillez choisir un mot de passe</p>}
+                                <select className="mb-4 p-2 bg-main-bg rounded" name="status" id="status-select" {...register("active")}>
                                     <option value="true">Actif</option>
                                     <option value="false">Inactif</option>
                                 </select>

@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import axios from "../api/axios";
+import { PartnersContext } from "../context/PartnersContext";
 
 const List = () => {
-    const [partners, setPartners] = useState([]);
+    const { partners, setPartners } = useContext(PartnersContext);
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get("/");
             setPartners(response.data.partners);
         };
         fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
     return (
         <>
             {partners && (
