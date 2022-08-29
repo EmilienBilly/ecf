@@ -71,6 +71,18 @@ router.get("/:partnerId", async (req, res) => {
     }
 });
 
+// GET one structure's details
+router.get("/structures/:structureId", async (req, res) => {
+    try {
+        const results = await database.query("SELECT * FROM structures WHERE id = $1", [req.params.structureId]);
+        res.json({
+            structure: results.rows[0],
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 router.put("/:partnerId", async (req, res) => {
     try {
         const results = await database.query(
@@ -83,18 +95,6 @@ router.put("/:partnerId", async (req, res) => {
         });
     } catch (err) {
         console.log(err);
-    }
-});
-
-router.get("/:partnerId/:structureId", async (req, res) => {
-    try {
-        const results = await database.query("SELECT * FROM structures WHERE partner_id = $1 AND id = $2", [req.params.partnerId, req.params.structureId]);
-        res.json({
-            structure: results.rows[0],
-        });
-        console.log(results);
-    } catch (error) {
-        console.log(error);
     }
 });
 

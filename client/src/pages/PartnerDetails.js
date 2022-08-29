@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "../api/axios";
 import Navbar from "../components/Navbar";
 import PageTitle from "../components/PageTitle";
@@ -28,24 +28,26 @@ const PartnerDetails = () => {
                     </div>
                     <div className="h-screen flex flex-col justify-center items-center">
                         {structures.map((structure, index) => (
-                            <div className="flex w-80 lg:w-96 justify-center bg-white py-4 px-2 mt-4 rounded-md">
-                                <div className="h-full w-3/4 flex flex-col mr-4">
-                                    <p className="">{structure.struct_name}</p>
-                                    <p className="text-xs">{structure.struct_address}</p>
-                                    <p className="text-xs">{structure.struct_email}</p>
+                            <Link key={index} to={`/structures/${structure.id}`}>
+                                <div className="flex w-80 lg:w-96 justify-center bg-white p-4 mt-4 rounded-md">
+                                    <div className="h-full w-3/4 flex flex-col mr-4">
+                                        <p className="">{structure.struct_name}</p>
+                                    </div>
+                                    <div className="h-full w-1/4">
+                                        {structure.struct_active ? (
+                                            <div className="flex gap-2 justify-center items-center">
+                                                <p className="rounded-full h-3 w-3 bg-primary-button"></p>
+                                                <p>Active</p>
+                                            </div>
+                                        ) : (
+                                            <div className="flex gap-2 justify-center items-center">
+                                                <p className="rounded-full h-3 w-3 bg-secondary-button"></p>
+                                                <p>Inactive</p>
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
-                                {structure.struct_active ? (
-                                    <div className="flex gap-2 justify-center items-center">
-                                        <p className="rounded-full h-3 w-3 bg-primary-button"></p>
-                                        <p>Active</p>
-                                    </div>
-                                ) : (
-                                    <div className="flex gap-2 justify-center items-center">
-                                        <p className="rounded-full h-3 w-3 bg-secondary-button"></p>
-                                        <p>Inactive</p>
-                                    </div>
-                                )}
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>

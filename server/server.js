@@ -12,4 +12,3 @@ app.use(express.json());
 app.use("/partners", partnersRouter);
 
 app.listen(process.env.PORT, () => {});
-
