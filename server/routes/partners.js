@@ -5,10 +5,12 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
     try {
-        const results = await database.query(
-            "INSERT INTO partners (partner_name, partner_email, partner_password, partner_active) values ($1, $2, $3, $4) returning *",
-            [req.body.name, req.body.email, req.body.password, req.body.active]
-        );
+        const results = await database.query("INSERT INTO partners (partner_name, partner_email, partner_password, partner_active) values ($1, $2, $3, $4) returning *", [
+            req.body.name,
+            req.body.email,
+            req.body.password,
+            req.body.active,
+        ]);
         res.status(201).json({
             status: "success",
             data: {
@@ -20,6 +22,7 @@ router.post("/", async (req, res) => {
     }
 });
 
+// GET all the partners
 router.get("/", async (req, res) => {
     try {
         const results = await database.query("SELECT * FROM partners;");
@@ -30,7 +33,7 @@ router.get("/", async (req, res) => {
         console.log(error);
     }
 });
-
+// GET all the partners that are active
 router.get("/active", async (req, res) => {
     try {
         const results = await database.query("SELECT * FROM partners WHERE partner_active = TRUE;");
@@ -42,6 +45,7 @@ router.get("/active", async (req, res) => {
     }
 });
 
+// GET all the partners that are inactive
 router.get("/inactive", async (req, res) => {
     try {
         const results = await database.query("SELECT * FROM partners WHERE partner_active = FALSE;");
@@ -53,27 +57,25 @@ router.get("/inactive", async (req, res) => {
     }
 });
 
-router.get("/:userId", async (req, res) => {
+// GET one partner's details and its structures
+router.get("/:partnerId", async (req, res) => {
     try {
-        const results = await database.query(
-            "SELECT structures.*, partners.partner_name FROM structures JOIN partners ON structures.partner_id = partners.id AND partners.id = $1;",
-            [req.params.userId]
-        );
+        const partnerResults = await database.query("SELECT * FROM partners WHERE partners.id = $1;", [req.params.partnerId]);
+        const structuresResults = await database.query("SELECT structures.* FROM structures JOIN partners ON structures.partner_id = partners.id AND partners.id = $1;", [req.params.partnerId]);
         res.json({
-            partner: results.rows[0].partner_name,
-            structures: results.rows,
+            partner: partnerResults.rows[0],
+            structures: structuresResults.rows,
         });
-        console.log(results);
     } catch (error) {
         console.log(error);
     }
 });
 
-router.put("/:userId", async (req, res) => {
+router.put("/:partnerId", async (req, res) => {
     try {
         const results = await database.query(
             "UPDATE partners SET partner_name = $1, partner_logo_url = $2, partner_email = $3, partner_password = $4, partner_active = $5 WHERE id = $6 returning *;",
-            [req.body.name, req.body.logo, req.body.email, req.body.password, req.body.active, req.params.userId]
+            [req.body.name, req.body.logo, req.body.email, req.body.password, req.body.active, req.params.partnerId]
         );
         res.status(200).json({
             status: "success",

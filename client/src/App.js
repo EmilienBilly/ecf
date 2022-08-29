@@ -1,6 +1,7 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Partners from "./pages/Partners";
 import { PartnersContextProvider } from "./context/PartnersContext";
+import PartnerDetails from "./pages/PartnerDetails";
 
 function App() {
     return (
@@ -8,6 +9,7 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Partners />} />
+                    <Route path="/partner/:id" element={<PartnerDetails />} />
                 </Routes>
             </BrowserRouter>
         </PartnersContextProvider>

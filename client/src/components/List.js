@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "../api/axios";
 import { PartnersContext } from "../context/PartnersContext";
 
@@ -32,7 +33,9 @@ const List = () => {
                                     {partners.map((partner, index) => (
                                         <tr key={index} className="border-b border-gray-200 hover:bg-gray-100">
                                             <td className="py-3 px-6 text-left whitespace-nowrap">{partner.id}</td>
-                                            <td className="py-3 px-6 text-left">{partner.partner_name}</td>
+                                            <Link to={`/partner/${partner.id}`}>
+                                                <td className="py-3 px-6 text-left">{partner.partner_name}</td>
+                                            </Link>
                                             <td className="py-3 px-6 text-left">{partner.partner_email}</td>
                                             {partner.partner_active ? (
                                                 <td class="py-3 px-6 text-center">
