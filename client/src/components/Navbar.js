@@ -1,12 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
+    const [width, setWidth] = useState(window.innerWidth);
+
+    const toggleNavbar = () => {
+        setIsOpen(!isOpen);
+    };
+
+    useEffect(() => {
+        const changeWidth = () => {
+            setWidth(window.innerWidth);
+            if (width < 1024) {
+                setIsOpen(false);
+            } else {
+                setIsOpen(true);
+            }
+        };
+
+        window.addEventListener("resize", changeWidth);
+
+        return () => {
+            window.addEventListener("resize", changeWidth);
+        };
+    }, [width]);
+
     return (
         <>
             {!isOpen ? (
-                <button className="fixed top-4 right-4" onClick={() => setIsOpen(true)}>
+                <button className="fixed top-4 right-4" onClick={toggleNavbar}>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
@@ -16,7 +39,7 @@ const Navbar = () => {
                     <div>
                         <div className="flex justify-between">
                             <span className="font-bold text-2xl sm:text-3xl p-2">One Gym</span>
-                            <button className="p-2 focus:outline-none focus:bg-teal-800 hover:bg-teal-800 rounded-md" onClick={() => setIsOpen(false)}>
+                            <button className="p-2 focus:outline-none focus:bg-teal-800 hover:bg-teal-800 rounded-md" onClick={toggleNavbar}>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
                                 </svg>
