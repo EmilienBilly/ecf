@@ -8,7 +8,6 @@ module.exports = {
                 "secondary-bg": "#424b54",
                 "light-gray": "#F7F7F7",
                 "half-transparent": "rgba(0, 0, 0, 0.5)",
-                "primary-button": "#17b890",
                 "secondary-button": "#e54b4b",
             },
         },

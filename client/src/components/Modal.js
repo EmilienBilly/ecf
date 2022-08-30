@@ -48,7 +48,7 @@ const Modal = ({ open, onClose }) => {
                                     <option value="false">Inactif</option>
                                 </select>
                                 <div className="flex justify-center">
-                                    <button className="px-4 py-2 rounded bg-primary-button text-white" type="submit">
+                                    <button className="px-4 py-2 rounded bg-emerald-700 text-white" type="submit">
                                         Ajouter
                                     </button>
                                     <button className="px-4 ml-4 rounded bg-secondary-button text-white" onClick={onClose}>
