@@ -20,8 +20,8 @@ const StructureDetails = () => {
 
     return (
         <div>
+            <Navbar />
             <div className="lg:flex min-h-screen bg-main-bg relative z-0 overflow-auto">
-                <Navbar />
                 <div className="lg:flex-grow">
                     <div className="ml-4">
                         <PageTitle title={structure.struct_name} />

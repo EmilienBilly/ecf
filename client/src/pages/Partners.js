@@ -10,17 +10,17 @@ const Partners = () => {
     return (
         <>
             <Navbar />
-            <div className="w-full">
-                <div className="bg-main-bg relative overflow-auto lg:min-w-7xl">
-                    <div className="flex items-center px-3">
+            <div className="min-h-screen bg-main-bg">
+                <div className="w-11/12 xl:w-1/2 mx-auto">
+                    <div className="">
                         <PageTitle title="Partenaires" />
-                        <div>
-                            <button type="button" className="align-self-center font-semibold text-white bg-emerald-700 px-4 py-2 rounded shadow" onClick={() => setOpenModal(true)}>
-                                Ajouter
-                            </button>
-                        </div>
                     </div>
-                    <List />
+                    <div>
+                        <button type="button" className="align-self-center font-semibold text-white bg-emerald-700 px-4 py-2 rounded shadow" onClick={() => setOpenModal(true)}>
+                            Ajouter
+                        </button>
+                        <List />
+                    </div>
                 </div>
                 <Modal open={openModal} onClose={() => setOpenModal(false)} />
             </div>
