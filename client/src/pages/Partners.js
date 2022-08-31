@@ -9,14 +9,14 @@ const Partners = () => {
 
     return (
         <>
-            <Navbar />
-            <div className="min-h-screen bg-main-bg">
+            <div className="h-full bg-main-bg">
+                <Navbar />
                 <div className="w-11/12 xl:w-1/2 mx-auto">
                     <div className="">
                         <PageTitle title="Partenaires" />
                     </div>
                     <div>
-                        <button type="button" className="align-self-center font-semibold text-white bg-emerald-700 px-4 py-2 rounded shadow" onClick={() => setOpenModal(true)}>
+                        <button type="button" className="align-self-center font-semibold text-xs md:text-base text-white bg-emerald-700 px-4 py-2 rounded shadow" onClick={() => setOpenModal(true)}>
                             Ajouter
                         </button>
                         <List />

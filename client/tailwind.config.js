@@ -4,11 +4,18 @@ module.exports = {
     theme: {
         extend: {
             backgroundColor: {
-                "main-bg": "#F5F5F5",
-                "secondary-bg": "#424b54",
+                "main-bg": "#f9fafc",
+                "secondary-bg": "#fefefe",
+                "green-bg": "#c1f497",
                 "light-gray": "#F7F7F7",
                 "half-transparent": "rgba(0, 0, 0, 0.5)",
                 "secondary-button": "#e54b4b",
+                "navbar-bg": "#fefefe",
+            },
+
+            colors: {
+                "green-logo": "#62a72d",
+                "green-text": "#5c813d",
             },
         },
     },
