@@ -5,12 +5,7 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
     try {
-        const results = await database.query("INSERT INTO partners (partner_name, partner_email, partner_password, partner_active) values ($1, $2, $3, $4) returning *", [
-            req.body.name,
-            req.body.email,
-            req.body.password,
-            req.body.active,
-        ]);
+        const results = await database.query("INSERT INTO partners (partner_name, partner_email, partner_password, partner_active) values ($1, $2, $3, $4) returning *", [req.body.name, req.body.email, req.body.password, req.body.active]);
         res.status(201).json({
             status: "success",
             data: {
@@ -85,10 +80,7 @@ router.get("/structures/:structureId", async (req, res) => {
 
 router.put("/:partnerId", async (req, res) => {
     try {
-        const results = await database.query(
-            "UPDATE partners SET partner_name = $1, partner_logo_url = $2, partner_email = $3, partner_password = $4, partner_active = $5 WHERE id = $6 returning *;",
-            [req.body.name, req.body.logo, req.body.email, req.body.password, req.body.active, req.params.partnerId]
-        );
+        const results = await database.query("UPDATE partners SET partner_name = $1, partner_email = $2, partner_password = $3, partner_active = $4 WHERE id = $5 returning *;", [req.body.name, req.body.email, req.body.password, req.body.active, req.params.partnerId]);
         res.status(200).json({
             status: "success",
             partner: results.rows[0],

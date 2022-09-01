@@ -10,6 +10,13 @@ const PartnerDetails = () => {
     const { id } = useParams();
     const [partner, setPartner] = useState([]);
     const [structures, setStructures] = useState([]);
+    const [edit, setEdit] = useState(false);
+
+    const handleEditClick = (e, edit) => {
+        e.preventDefault();
+        setEdit(!edit);
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get(`/${id}`);
@@ -17,7 +24,7 @@ const PartnerDetails = () => {
             setStructures(response.data.structures);
         };
         fetchData();
-
+        console.log(edit);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
@@ -26,8 +33,7 @@ const PartnerDetails = () => {
                 <Navbar />
                 <div className="w-11/12 xl:w-1/2 mx-auto">
                     <PageTitle title="Détails du partenaire" />
-                    <EditableInfos partner={partner} />
-                    <ReadInfos partner={partner} />
+                    {edit ? <EditableInfos partner={partner} id={id} /> : <ReadInfos partner={partner} handleEditClick={handleEditClick} />}
                     {structures && (
                         <div class="mx-auto w-full">
                             {structures.map((structure, index) => (
