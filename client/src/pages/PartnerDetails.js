@@ -24,7 +24,6 @@ const PartnerDetails = () => {
             setStructures(response.data.structures);
         };
         fetchData();
-        console.log(edit);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
@@ -33,7 +32,7 @@ const PartnerDetails = () => {
                 <Navbar />
                 <div className="w-11/12 xl:w-1/2 mx-auto">
                     <PageTitle title="Détails du partenaire" />
-                    {edit ? <EditableInfos partner={partner} id={id} /> : <ReadInfos partner={partner} handleEditClick={handleEditClick} />}
+                    {edit ? <EditableInfos partner={partner} setPartner={setPartner} id={id} handleEditClick={handleEditClick} setEdit={setEdit} edit={edit} /> : <ReadInfos partner={partner} handleEditClick={handleEditClick} />}
                     {structures && (
                         <div class="mx-auto w-full">
                             {structures.map((structure, index) => (
