@@ -16,7 +16,7 @@ const EditableInfos = ({ partner, setPartner, id, setEdit, edit }) => {
                 email: data.email,
                 password: data.password,
                 active: data.active,
-            });
+            }); 
             setEdit(!edit);
             setPartner(response.data.partner);
             console.log(response);
