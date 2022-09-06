@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 4000;
 
 // middleware
-app.use(cors({ origin: process.env.REMOTE_CLIENT_APP, credentials: true }));
+app.use(cors());
 app.use(express.json());
 
 app.use("/partners", partnersRouter);
