@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/", (req, res) => {
-    res.send("Test");
+    res.send("Hello Potoff");
 });
 
 // app.use("/partners", partnersRouter);
