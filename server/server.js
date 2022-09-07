@@ -10,11 +10,7 @@ const PORT = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 
-app.use("/", (req, res) => {
-    res.send("Hello Emile");
-});
-
-// app.use("/partners", partnersRouter);
+app.use("/partners", partnersRouter);
 
 app.listen(PORT, () => {
     console.log(`Example app listening at http://localhost:${PORT}`);
