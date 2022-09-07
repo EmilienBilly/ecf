@@ -3,17 +3,6 @@ const database = require("../db");
 
 const router = express.Router();
 
-router.get("/rights", async (req, res) => {
-    try {
-        const results = await database.query("SELECT * FROM rights;");
-        res.json({
-            rights: results.rows,
-        });
-    } catch (error) {
-        console.log(error);
-    }
-});
-
 router.post("/", async (req, res) => {
     try {
         const results = await database.query("INSERT INTO partners (partner_name, partner_email, partner_password, partner_active) values ($1, $2, $3, $4) returning *", [req.body.name, req.body.email, req.body.password, req.body.active]);
@@ -39,6 +28,18 @@ router.get("/", async (req, res) => {
         console.log(error);
     }
 });
+
+router.get("/rights", async (req, res) => {
+    try {
+        const results = await database.query("SELECT * FROM rights");
+        res.json({
+            rights: results.rows,
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 // GET all the partners that are active
 router.get("/active", async (req, res) => {
     try {
