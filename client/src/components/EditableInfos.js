@@ -2,11 +2,7 @@ import { useForm } from "react-hook-form";
 import axios from "../api/axios";
 
 const EditableInfos = ({ partner, setPartner, id, setEdit, edit }) => {
-    const {
-        handleSubmit,
-        register,
-        formState: { errors },
-    } = useForm();
+    const { handleSubmit, register } = useForm();
 
     const onSubmit = async (data) => {
         console.log(data);
@@ -16,7 +12,7 @@ const EditableInfos = ({ partner, setPartner, id, setEdit, edit }) => {
                 email: data.email,
                 password: data.password,
                 active: data.active,
-            }); 
+            });
             setEdit(!edit);
             setPartner(response.data.partner);
             console.log(response);
