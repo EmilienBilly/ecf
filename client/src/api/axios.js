@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-    baseURL: "https://ecf-production.up.railway.app/partners",
+    baseURL: "http://localhost:4000/partners",
 });

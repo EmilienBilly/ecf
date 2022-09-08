@@ -5,10 +5,12 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
     try {
+        const userResults = await database.query("INSERT INTO users (user_email, user_password) values ($1, $2) returning *", [req.body.email, req.body.password]);
         const results = await database.query("INSERT INTO partners (partner_name, partner_email, partner_password, partner_active) values ($1, $2, $3, $4) returning *", [req.body.name, req.body.email, req.body.password, req.body.active]);
         res.status(201).json({
             status: "success",
             data: {
+                user: userResults.rows[0],
                 partner: results.rows[0],
             },
         });
