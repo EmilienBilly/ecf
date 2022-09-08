@@ -3,6 +3,29 @@ const database = require("../db");
 
 const router = express.Router();
 
+// GET all the partners
+router.get("/", async (req, res) => {
+    try {
+        const results = await database.query("SELECT * FROM partners;");
+        res.json({
+            partners: results.rows,
+        });
+    } catch (error) {
+        console.error(err);
+    }
+});
+
+router.get("/rights", async (req, res) => {
+    try {
+        const results = await database.query("SELECT * FROM rights;");
+        res.json({
+            partners: results.rows,
+        });
+    } catch (error) {
+        console.error(err);
+    }
+});
+
 router.post("/", async (req, res) => {
     try {
         const results = await database.query("INSERT INTO partners (partner_name, partner_email, partner_password, partner_active) values ($1, $2, $3, $4) returning *", [req.body.name, req.body.email, req.body.password, req.body.active]);
@@ -13,30 +36,7 @@ router.post("/", async (req, res) => {
             },
         });
     } catch (err) {
-        console.log(err);
-    }
-});
-
-// GET all the partners
-router.get("/", async (req, res) => {
-    try {
-        const results = await database.query("SELECT * FROM partners;");
-        res.json({
-            partners: results.rows,
-        });
-    } catch (error) {
-        console.log(error);
-    }
-});
-
-router.get("/rights", async (req, res) => {
-    try {
-        const results = await database.query("SELECT * FROM rights");
-        res.json({
-            rights: results.rows,
-        });
-    } catch (error) {
-        console.log(error);
+        console.error(err);
     }
 });
 
