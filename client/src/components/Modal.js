@@ -3,7 +3,7 @@ import axios from "../api/axios";
 import { PartnersContext } from "../context/PartnersContext";
 import { useForm } from "react-hook-form";
 
-const Modal = ({ open, onClose }) => {
+const Modal = ({ open, onClose, rights }) => {
     const { addPartners } = useContext(PartnersContext);
     const {
         handleSubmit,

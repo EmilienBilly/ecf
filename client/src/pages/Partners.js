@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import List from "../components/List";
 import PageTitle from "../components/PageTitle";
 import Modal from "../components/Modal";
+import axios from "../api/axios";
 
 const Partners = () => {
     const [openModal, setOpenModal] = useState(false);
+    const [rights, setRights] = useState([]);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get("/rights");
+            setRights(response.data.rights);
+        };
+        fetchData();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+    console.log(rights);
     return (
         <>
             <div className="h-full bg-main-bg">
