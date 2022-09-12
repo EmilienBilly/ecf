@@ -69,11 +69,11 @@ router.get("/inactive", async (req, res) => {
 // GET one partner's details and its structures
 router.get("/:partnerId", async (req, res) => {
     try {
-        const partnerResults = await database.query("SELECT * FROM partners WHERE partners.id = $1;", [req.params.partnerId]);
-        const structuresResults = await database.query("SELECT structures.* FROM structures JOIN partners ON structures.partner_id = partners.id AND partners.id = $1;", [req.params.partnerId]);
+        const partnerResults = await database.query("SELECT partners.*, users.user_email FROM partners INNER JOIN users ON partners.user_id = users.id WHERE partners.id = $1;", [req.params.partnerId]);
+        // const structuresResults = await database.query("SELECT structures.* FROM structures JOIN partners ON structures.partner_id = partners.id AND partners.id = $1;", [req.params.partnerId]);
         res.json({
             partner: partnerResults.rows[0],
-            structures: structuresResults.rows,
+            // structures: structuresResults.rows,
         });
     } catch (error) {
         console.log(error);
@@ -94,10 +94,12 @@ router.get("/structures/:structureId", async (req, res) => {
 
 router.put("/:partnerId", async (req, res) => {
     try {
-        const results = await database.query("UPDATE partners SET partner_name = $1, partner_email = $2, partner_password = $3, partner_active = $4 WHERE id = $5 returning *;", [req.body.name, req.body.email, req.body.password, req.body.active, req.params.partnerId]);
+        const partnerResults = await database.query("UPDATE partners SET partner_name = $1, partner_active = $2 WHERE id = $3 returning *;", [req.body.name, req.body.active, req.params.partnerId]);
+        const userResults = await database.query("UPDATE users SET user_email = $1 WHERE id = $2 returning *;", [req.body.email, partnerResults.rows[0].user_id]);
         res.status(200).json({
             status: "success",
-            partner: results.rows[0],
+            partner: partnerResults.rows[0],
+            user: userResults.rows[0],
         });
     } catch (err) {
         console.log(err);
@@ -105,3 +107,5 @@ router.put("/:partnerId", async (req, res) => {
 });
 
 module.exports = router;
+
+
