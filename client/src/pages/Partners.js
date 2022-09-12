@@ -33,7 +33,7 @@ const Partners = () => {
                         <List />
                     </div>
                 </div>
-                <Modal open={openModal} onClose={() => setOpenModal(false)} />
+                <Modal open={openModal} rights={rights} onClose={() => setOpenModal(false)} />
             </div>
         </>
     );

@@ -14,15 +14,16 @@ const Modal = ({ open, onClose, rights }) => {
     const onSubmit = async (data) => {
         console.log(data);
         try {
+            const right = rights.filter((right) => right.right_name === "partner");
             const response = await axios.post("/", {
                 name: data.name,
                 email: data.email,
                 password: data.password,
                 active: data.active,
+                right_id: right[0].id,
             });
             //Function created in the context to add the newly added partner into partners state
             addPartners(response.data.data.partner);
-            console.log(response);
             onClose();
         } catch (err) {}
     };

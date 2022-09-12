@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
     try {
-        const userResults = await database.query("INSERT INTO users (user_email, user_password) values ($1, $2) returning *", [req.body.email, req.body.password]);
-        const results = await database.query("INSERT INTO partners (partner_name, partner_email, partner_password, partner_active) values ($1, $2, $3, $4) returning *", [req.body.name, req.body.email, req.body.password, req.body.active]);
+        const userResults = await database.query("INSERT INTO users (user_email, user_password, right_id) values ($1, $2, $3) returning *", [req.body.email, req.body.password, req.body.right_id]);
+        const results = await database.query("INSERT INTO partners (partner_name, partner_active, user_id) values ($1, $2, $3) returning *", [req.body.name, req.body.active, userResults.rows[0].id]);
         res.status(201).json({
             status: "success",
             data: {
@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
 // GET all the partners
 router.get("/", async (req, res) => {
     try {
-        const results = await database.query("SELECT * FROM partners;");
+        const results = await database.query("SELECT partners.*, users.user_email FROM partners INNER JOIN users ON partners.user_id = users.id;");
         res.json({
             partners: results.rows,
         });
@@ -33,7 +33,7 @@ router.get("/", async (req, res) => {
 
 router.get("/rights", async (req, res) => {
     try {
-        const results = await database.query("SELECT * FROM rights");
+        const results = await database.query("SELECT * FROM rights WHERE right_name != 'admin'");
         res.json({
             rights: results.rows,
         });
