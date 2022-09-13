@@ -19,13 +19,14 @@ const PartnerDetails = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(`/${id}`);
+            const response = await axios.get(`/partners/${id}`);
             setPartner(response.data.partner);
             setStructures(response.data.structures);
         };
         fetchData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+    console.log(structures);
     return (
         <>
             <div className="h-screen bg-main-bg">

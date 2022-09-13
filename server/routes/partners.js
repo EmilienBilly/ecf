@@ -70,22 +70,10 @@ router.get("/inactive", async (req, res) => {
 router.get("/:partnerId", async (req, res) => {
     try {
         const partnerResults = await database.query("SELECT partners.*, users.user_email FROM partners INNER JOIN users ON partners.user_id = users.id WHERE partners.id = $1;", [req.params.partnerId]);
-        // const structuresResults = await database.query("SELECT structures.* FROM structures JOIN partners ON structures.partner_id = partners.id AND partners.id = $1;", [req.params.partnerId]);
+        const structuresResults = await database.query("SELECT structures.* FROM structures JOIN partners ON structures.partner_id = partners.id AND partners.id = $1;", [req.params.partnerId]);
         res.json({
             partner: partnerResults.rows[0],
-            // structures: structuresResults.rows,
-        });
-    } catch (error) {
-        console.log(error);
-    }
-});
-
-// GET one structure's details
-router.get("/structures/:structureId", async (req, res) => {
-    try {
-        const results = await database.query("SELECT * FROM structures WHERE id = $1", [req.params.structureId]);
-        res.json({
-            structure: results.rows[0],
+            structures: structuresResults.rows,
         });
     } catch (error) {
         console.log(error);
@@ -107,5 +95,3 @@ router.put("/:partnerId", async (req, res) => {
 });
 
 module.exports = router;
-
-

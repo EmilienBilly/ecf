@@ -1,5 +1,6 @@
 require("dotenv").config();
 const partnersRouter = require("./routes/partners");
+const structuresRouter = require("./routes/structures");
 const express = require("express");
 const cors = require("cors");
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/partners", partnersRouter);
+app.use("/structures", structuresRouter);
 
 app.listen(PORT, () => {
     console.log(`App listening at http://localhost:${PORT}`);

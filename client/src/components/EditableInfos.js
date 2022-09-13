@@ -7,7 +7,7 @@ const EditableInfos = ({ partner, setPartner, id, setEdit, edit }) => {
     const onSubmit = async (data) => {
         console.log(data);
         try {
-            const response = await axios.put(`/${id}`, {
+            const response = await axios.put(`/partners/${id}`, {
                 name: data.name,
                 email: data.email,
                 active: data.active,

@@ -11,7 +11,7 @@ const Partners = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get("/rights");
+            const response = await axios.get("/partners/rights");
             setRights(response.data.rights);
         };
         fetchData();
@@ -20,7 +20,7 @@ const Partners = () => {
     console.log(rights);
     return (
         <>
-            <div className="h-full bg-main-bg">
+            <div className="h-screen bg-main-bg">
                 <Navbar />
                 <div className="w-11/12 xl:w-1/2 mx-auto">
                     <div className="">

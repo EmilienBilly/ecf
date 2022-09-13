@@ -7,7 +7,7 @@ const List = () => {
     const { partners, setPartners } = useContext(PartnersContext);
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get("/");
+            const response = await axios.get("/partners");
             setPartners(response.data.partners);
         };
         fetchData();

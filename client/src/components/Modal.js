@@ -15,7 +15,7 @@ const Modal = ({ open, onClose, rights }) => {
         console.log(data);
         try {
             const right = rights.filter((right) => right.right_name === "partner");
-            const response = await axios.post("/", {
+            const response = await axios.post("/partners", {
                 name: data.name,
                 email: data.email,
                 password: data.password,
