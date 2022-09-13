@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
             status: "success",
             data: {
                 user: userResults.rows[0],
-                partner: results.rows[0],
+                structure: results.rows[0],
             },
         });
     } catch (err) {

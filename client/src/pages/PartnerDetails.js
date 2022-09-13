@@ -44,7 +44,7 @@ const PartnerDetails = () => {
                     <AddButton setOpenModal={setOpenModal} title={"Ajouter une structure"} />
                     {structures && <StructuresList structures={structures} />}
                 </div>
-                <NewStructureModal open={openModal} rights={rights} onClose={() => setOpenModal(false)} />
+                <NewStructureModal open={openModal} structures={structures} setStructures={setStructures} rights={rights} onClose={() => setOpenModal(false)} partnerId={id} />
             </div>
         </>
     );
