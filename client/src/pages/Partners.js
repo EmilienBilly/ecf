@@ -4,6 +4,7 @@ import List from "../components/List";
 import PageTitle from "../components/PageTitle";
 import Modal from "../components/Modal";
 import axios from "../api/axios";
+import AddButton from "../components/AddButton";
 
 const Partners = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -26,12 +27,8 @@ const Partners = () => {
                     <div className="">
                         <PageTitle title="Partenaires" />
                     </div>
-                    <div>
-                        <button type="button" className="align-self-center font-semibold text-xs md:text-base text-white bg-emerald-700 px-4 py-2 rounded shadow" onClick={() => setOpenModal(true)}>
-                            Ajouter
-                        </button>
-                        <List />
-                    </div>
+                    <AddButton setOpenModal={setOpenModal} title={"Ajouter"} />
+                    <List />
                 </div>
                 <Modal open={openModal} rights={rights} onClose={() => setOpenModal(false)} />
             </div>
