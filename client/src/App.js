@@ -4,6 +4,7 @@ import { PartnersContextProvider } from "./context/PartnersContext";
 import PartnerDetails from "./pages/PartnerDetails";
 import StructureDetails from "./pages/StructureDetails";
 import Navbar from "./components/Navbar";
+import Offers from "./pages/Offers";
 
 function App() {
     return (
@@ -14,6 +15,7 @@ function App() {
                     <Route path="/" element={<Partners />} />
                     <Route path="/partners/:id" element={<PartnerDetails />} />
                     <Route path="/structures/:id" element={<StructureDetails />} />
+                    <Route path="/offers" element={<Offers />} />
                 </Routes>
             </BrowserRouter>
         </PartnersContextProvider>
