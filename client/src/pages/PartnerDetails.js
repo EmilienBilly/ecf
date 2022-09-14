@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import axios from "../api/axios";
 import AddButton from "../components/AddButton";
 import EditableInfos from "../components/EditableInfos";
-import Navbar from "../components/Navbar";
 import NewStructureModal from "../components/NewStructureModal";
 import PageTitle from "../components/PageTitle";
 import ReadInfos from "../components/ReadInfos";
@@ -35,18 +34,15 @@ const PartnerDetails = () => {
     }, []);
     console.log(structures);
     return (
-        <>
-            <div className="h-screen bg-main-bg">
-                <Navbar />
-                <div className="w-11/12 xl:w-1/2 mx-auto">
-                    <PageTitle title="Détails du partenaire" />
-                    {edit ? <EditableInfos partner={partner} setPartner={setPartner} id={id} handleEditClick={handleEditClick} setEdit={setEdit} edit={edit} /> : <ReadInfos partner={partner} handleEditClick={handleEditClick} />}
-                    <AddButton setOpenModal={setOpenModal} title={"Ajouter une structure"} />
-                    {structures && <StructuresList structures={structures} />}
-                </div>
-                <NewStructureModal open={openModal} structures={structures} setStructures={setStructures} rights={rights} onClose={() => setOpenModal(false)} partnerId={id} />
+        <div className="lg:flex min-h-screen bg-main-bg relative z-0 overflow-auto">
+            <div className="w-11/12 xl:w-1/2 mx-auto">
+                <PageTitle title="Détails du partenaire" />
+                {edit ? <EditableInfos partner={partner} setPartner={setPartner} id={id} handleEditClick={handleEditClick} setEdit={setEdit} edit={edit} /> : <ReadInfos partner={partner} handleEditClick={handleEditClick} />}
+                <AddButton setOpenModal={setOpenModal} title={"Ajouter une structure"} />
+                {structures && <StructuresList structures={structures} />}
             </div>
-        </>
+            <NewStructureModal open={openModal} structures={structures} setStructures={setStructures} rights={rights} onClose={() => setOpenModal(false)} partnerId={id} />
+        </div>
     );
 };
 

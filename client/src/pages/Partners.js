@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import List from "../components/List";
 import PageTitle from "../components/PageTitle";
 import Modal from "../components/Modal";
@@ -20,19 +19,16 @@ const Partners = () => {
     }, []);
     console.log(rights);
     return (
-        <>
-            <div className="h-screen bg-main-bg">
-                <Navbar />
-                <div className="w-11/12 xl:w-1/2 mx-auto">
-                    <div className="">
-                        <PageTitle title="Partenaires" />
-                    </div>
-                    <AddButton setOpenModal={setOpenModal} title={"Ajouter"} />
-                    <List />
+        <div className="lg:flex min-h-screen bg-main-bg relative z-0 overflow-auto">
+            <div className="w-11/12 xl:w-1/2 mx-auto">
+                <div className="">
+                    <PageTitle title="Partenaires" />
                 </div>
-                <Modal open={openModal} rights={rights} onClose={() => setOpenModal(false)} />
+                <AddButton setOpenModal={setOpenModal} title={"Ajouter"} />
+                <List />
             </div>
-        </>
+            <Modal open={openModal} rights={rights} onClose={() => setOpenModal(false)} />
+        </div>
     );
 };
 

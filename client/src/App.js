@@ -3,11 +3,13 @@ import Partners from "./pages/Partners";
 import { PartnersContextProvider } from "./context/PartnersContext";
 import PartnerDetails from "./pages/PartnerDetails";
 import StructureDetails from "./pages/StructureDetails";
+import Navbar from "./components/Navbar";
 
 function App() {
     return (
         <PartnersContextProvider>
             <BrowserRouter>
+                <Navbar />
                 <Routes>
                     <Route path="/" element={<Partners />} />
                     <Route path="/partners/:id" element={<PartnerDetails />} />
