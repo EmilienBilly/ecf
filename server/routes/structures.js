@@ -6,7 +6,7 @@ const router = express.Router();
 // GET one structure's details
 router.get("/:structureId", async (req, res) => {
     try {
-        const results = await database.query("SELECT * FROM structures WHERE id = $1", [req.params.structureId]);
+        const results = await database.query("SELECT structures.*, users.user_email FROM structures INNER JOIN users ON structures.user_id = users.id WHERE structures.id = $1;", [req.params.structureId]);
         res.json({
             structure: results.rows[0],
         });

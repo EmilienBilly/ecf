@@ -10,7 +10,8 @@ const StructureDetails = () => {
         const fetchData = async () => {
             const response = await axios.get(`/structures/${id}`);
             setStructure(response.data.structure);
-            console.log(response);
+
+            
         };
         fetchData();
 
