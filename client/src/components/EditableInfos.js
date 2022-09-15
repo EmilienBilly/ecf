@@ -20,7 +20,7 @@ const EditableInfos = ({ partner, setPartner, id, setEdit, edit }) => {
 
     return (
         <>
-            <div>
+            <div className="mb-4">
                 <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
                     <input required className="w-full border-gray-200 rounded-lg shadow-sm" type="text" defaultValue={partner.partner_name} placeholder="Nom" {...register("name", { required: true })} />
                     <input className="w-full border-gray-200 rounded-lg shadow-sm" type="email" defaultValue={partner.user_email} placeholder="Email" {...register("email", { required: true })} />
@@ -29,7 +29,7 @@ const EditableInfos = ({ partner, setPartner, id, setEdit, edit }) => {
                         <option value="false">Inactif</option>
                     </select>
                     <button className="px-4 py-2 rounded bg-emerald-700 text-white" type="submit">
-                        Ajouter
+                        Modifier
                     </button>
                 </form>
             </div>

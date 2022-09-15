@@ -2,7 +2,6 @@ const ReadInfos = ({ partner, handleEditClick }) => {
     return (
         <>
             <div className="mb-8">
-                <p className="text-lg font-bold">{partner.partner_name}</p>
                 <p className="text-sm">{partner.user_email}</p>
                 <p className="text-sm">{partner.partner_password}</p>
                 <p className="text-sm">{partner.partner_active ? "Actif" : "Inactif"}</p>

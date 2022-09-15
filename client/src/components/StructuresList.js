@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 
 const StructuresList = ({ structures }) => {
     return (
-        <div class="mx-auto w-full m-4">
+        <div class="bg-main-bg p-4 mx-auto w-full m-4 rounded-lg">
+            <h2 className="mb-4 text-2xl font-bold">Structures</h2>
             {structures.map((structure, index) => (
                 <Link key={index} to={`/structures/${structure.id}`}>
                     <div class="flex bg-secondary-bg shadow-sm rounded-lg mb-4 h-24 gap-4">
