@@ -32,13 +32,4 @@ router.post("/", async (req, res) => {
     }
 });
 
-router.get("/:structureId/:partnerId", async (req, res) => {
-    try {
-        const results = await database.query("SELECT partners_offers* FROM partners_offers WHERE partner_id = $1;", [req.params.partnerId]);
-        res.json({
-            offers: results.rows,
-        });
-    } catch (error) {}
-});
-
 module.exports = router;

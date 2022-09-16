@@ -17,11 +17,11 @@ const List = () => {
     return (
         <>
             {partners && (
-                <div class="mx-auto w-full">
-                    <div class="mx-auto w-full">
+                <div className="mx-auto w-full">
+                    <div className="mx-auto w-full">
                         {partners.map((partner, index) => (
                             <Link key={index} to={`/partners/${partner.id}`}>
-                                <div class="bg-white shadow rounded-lg">
+                                <div className="bg-white shadow rounded-lg">
                                     <div className="flex flex-col p-4 mt-4 rounded-md">
                                         <div className=" w-3/4 flex flex-col mr-4">
                                             <p className="">{partner.partner_name}</p>

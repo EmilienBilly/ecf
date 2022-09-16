@@ -2,37 +2,38 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import PageTitle from "../components/PageTitle";
 import axios from "../api/axios";
+import AddStructuresOffers from "../components/AddStructuresOffers";
 
 const StructureDetails = () => {
-    const { id } = useParams();
-    const [structure, setStructure] = useState([]);
-    const [offers, setOffers] = useState([]);
-    const partnerId = structure.partner_id;
+    const { partnerId, structureId } = useParams();
+    const [structureInfos, setStructureInfos] = useState([]);
+    const [partnerOffers, setPartnerOffers] = useState([]);
+    console.log(partnerOffers);
     useEffect(() => {
         const fetchData = async () => {
-            const response = await axios.get(`/structures/${id}`);
-            setStructure(response.data.structure);
+            const response = await axios.get(`/structures/${structureId}`);
+            setStructureInfos(response.data.structure);
 
-            const getOffers = await axios.get(`/partners_offers/${partnerId}`);
-            setOffers(getOffers.data.offers);
+            const getPartnersOffers = await axios.get(`/partners_offers/${partnerId}`);
+            setPartnerOffers(getPartnersOffers.data.offers);
         };
         fetchData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
-    console.log(offers);
     return (
         <div className="lg:flex min-h-screen bg-main-bg relative z-0 overflow-auto">
-            <div className="lg:flex-grow">
-                <div className="ml-4">
-                    <PageTitle title={structure.struct_name} />
-                </div>
-                <p>{structure.struct_address}</p>
-                <p>{structure.user_email}</p>
-                {offers.map((offer) => (
-                    <div key={offer.id}>
-                        <p>{offer.offer_name}</p>
+            <div className="w-11/12 xl:w-1/2 mx-auto">
+                <div className="lg:flex-grow">
+                    <div className="ml-4">
+                        <PageTitle title={structureInfos.struct_name} />
                     </div>
-                ))}
+
+                    <div className="mb-4">
+                        <p>{structureInfos.struct_address}</p>
+                        <p>{structureInfos.user_email}</p>
+                    </div>
+                    {partnerOffers && <AddStructuresOffers partnerOffers={partnerOffers} />}
+                </div>
             </div>
         </div>
     );

@@ -20,6 +20,7 @@ const PartnerDetails = () => {
     const [rights, setRights] = useState([]);
     const [offers, setOffers] = useState([]);
     const [partnersOffers, setPartnersOffers] = useState([]);
+
     const handleEditClick = (e, edit) => {
         e.preventDefault();
         setEdit(!edit);
@@ -50,10 +51,9 @@ const PartnerDetails = () => {
                     <PageTitle title={partner.partner_name} />
                     <AddButton setOpenModal={setOpenModal} title={"Ajouter une structure"} />
                 </div>
-
                 {edit ? <EditableInfos partner={partner} setPartner={setPartner} id={id} handleEditClick={handleEditClick} setEdit={setEdit} edit={edit} /> : <ReadInfos partner={partner} handleEditClick={handleEditClick} />}
-                {partnersOffers && <OfferList partnersOffers={partnersOffers} />}
-                <AddOffer offers={offers} partnerId={id} setPartnersOffers={setPartnersOffers} partnersOffers={partnersOffers} />
+                {partnersOffers && <OfferList offers={partnersOffers} />}
+                <AddOffer offers={offers} partnerId={id} setOffers={setPartnersOffers} />
                 {structures && <StructuresList structures={structures} />}
             </div>
 
