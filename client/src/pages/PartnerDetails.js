@@ -20,7 +20,6 @@ const PartnerDetails = () => {
     const [rights, setRights] = useState([]);
     const [offers, setOffers] = useState([]);
     const [partnersOffers, setPartnersOffers] = useState([]);
-
     const handleEditClick = (e, edit) => {
         e.preventDefault();
         setEdit(!edit);

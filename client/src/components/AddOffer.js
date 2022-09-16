@@ -6,13 +6,13 @@ const AddOffer = ({ offers, partnerId, partnersOffers, setPartnersOffers }) => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post("/partners_offers", {
+            await axios.post("/partners_offers", {
                 offer_id: data.offerId,
                 partner_id: partnerId,
                 active: true,
             });
-            console.log(response);
-            setPartnersOffers([...partnersOffers, response.data.offer]);
+            const getPartnersOffers = await axios.get(`/partners_offers/${partnerId}`);
+            setPartnersOffers(getPartnersOffers.data.offers);
         } catch (error) {
             console.log(error);
         }
