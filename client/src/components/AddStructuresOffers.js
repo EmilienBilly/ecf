@@ -1,9 +1,19 @@
 import { useForm } from "react-hook-form";
+import axios from "../api/axios";
 
-const AddStructuresOffers = ({ partnerOffers }) => {
+const AddStructuresOffers = ({ partnerOffers, structureId }) => {
     const { handleSubmit, register } = useForm();
 
-    const onSubmit = async (data) => {};
+    const onSubmit = async (data) => {
+        try {
+            await axios.post(`/structures_offers/${structureId}`, {
+                offer_id: data.offerId,
+                active: true,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
     return (
         <form className="flex justify-between" onSubmit={handleSubmit(onSubmit)}>
             <select className="w-2/3 lg:w-1/3 mr-2 p-2 bg-white rounded" {...register("offerId", { required: true })}>

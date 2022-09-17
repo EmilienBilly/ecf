@@ -32,7 +32,7 @@ const StructureDetails = () => {
                         <p>{structureInfos.struct_address}</p>
                         <p>{structureInfos.user_email}</p>
                     </div>
-                    {partnerOffers && <AddStructuresOffers partnerOffers={partnerOffers} />}
+                    {partnerOffers && <AddStructuresOffers partnerOffers={partnerOffers} structureId={structureId} />}
                 </div>
             </div>
         </div>

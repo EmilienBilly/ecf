@@ -4,6 +4,7 @@ const structuresRouter = require("./routes/structures");
 const offersRouter = require("./routes/offers");
 const partnersOffersRouter = require("./routes/partners_offers");
 const structuresOffersRouter = require("./routes/structures_offers");
+
 const express = require("express");
 const cors = require("cors");
 
