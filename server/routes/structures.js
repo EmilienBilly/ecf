@@ -1,5 +1,6 @@
 const express = require("express");
 const database = require("../db");
+const bcrypt = require("bcrypt");
 
 const router = express.Router();
 
@@ -18,13 +19,26 @@ router.get("/:structureId", async (req, res) => {
 // Create one structure for a partner
 router.post("/", async (req, res) => {
     try {
-        const userResults = await database.query("INSERT INTO users (user_email, user_password, right_id) values ($1, $2, $3) returning *", [req.body.email, req.body.password, req.body.right_id]);
-        const results = await database.query("INSERT INTO structures (struct_name, struct_address, struct_active, partner_id, user_id) values ($1, $2, $3, $4, $5) returning *", [req.body.name, req.body.address, req.body.active, req.body.partner_id, userResults.rows[0].id]);
+        //check if user already exists
+        const user = await database.query("SELECT * FROM users WHERE user_email = $1", [req.body.email]);
+
+        if (user.rows.length !== 0) {
+            return res.status(401).send("Cet utilisateur existe déjà");
+        }
+
+        // using bcrypt to hash the password
+        const saltRound = 10;
+        const salt = await bcrypt.genSalt(saltRound);
+        const bcryptPassword = await bcrypt.hash(req.body.password, salt);
+
+        // Adding a new user
+        const newUser = await database.query("INSERT INTO users (user_email, user_password, right_id) values ($1, $2, $3) returning *", [req.body.email, bcryptPassword, req.body.right_id]);
+        const newStructure = await database.query("INSERT INTO structures (struct_name, struct_address, struct_active, partner_id, user_id) values ($1, $2, $3, $4, $5) returning *", [req.body.name, req.body.address, req.body.active, req.body.partner_id, newUser.rows[0].id]);
         res.status(201).json({
             status: "success",
             data: {
-                user: userResults.rows[0],
-                structure: results.rows[0],
+                user: newUser.rows[0],
+                structure: newStructure.rows[0],
             },
         });
     } catch (err) {

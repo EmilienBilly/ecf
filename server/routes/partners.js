@@ -1,17 +1,32 @@
 const express = require("express");
 const database = require("../db");
+const bcrypt = require("bcrypt");
 
 const router = express.Router();
 
 router.post("/", async (req, res) => {
     try {
-        const userResults = await database.query("INSERT INTO users (user_email, user_password, right_id) values ($1, $2, $3) returning *", [req.body.email, req.body.password, req.body.right_id]);
-        const results = await database.query("INSERT INTO partners (partner_name, partner_active, user_id) values ($1, $2, $3) returning *", [req.body.name, req.body.active, userResults.rows[0].id]);
+        //check if user already exists
+        const user = await database.query("SELECT * FROM users WHERE user_email = $1", [req.body.email]);
+
+        if (user.rows.length !== 0) {
+            return res.status(401).send("Cet utilisateur existe déjà");
+        }
+
+        // using bcrypt to hash the password
+        const saltRound = 10;
+        const salt = await bcrypt.genSalt(saltRound);
+        const bcryptPassword = await bcrypt.hash(req.body.password, salt);
+
+        // Adding a new user
+        const newUser = await database.query("INSERT INTO users (user_email, user_password, right_id) values ($1, $2, $3) RETURNING *", [req.body.email, bcryptPassword, req.body.right_id]);
+        const newPartner = await database.query("INSERT INTO partners (partner_name, partner_active, user_id) values ($1, $2, $3) returning *", [req.body.name, req.body.active, newUser.rows[0].id]);
+
         res.status(201).json({
             status: "success",
             data: {
-                user: userResults.rows[0],
-                partner: results.rows[0],
+                user: newUser.rows[0],
+                partner: newPartner.rows[0],
             },
         });
     } catch (err) {
