@@ -1,6 +1,7 @@
 const express = require("express");
 const database = require("../db");
 const bcrypt = require("bcrypt");
+const jwtGenerator = require("../jwtGenerator");
 
 const router = express.Router();
 
@@ -22,11 +23,14 @@ router.post("/", async (req, res) => {
         const newUser = await database.query("INSERT INTO users (user_email, user_password, right_id) values ($1, $2, $3) RETURNING *", [req.body.email, bcryptPassword, req.body.right_id]);
         const newPartner = await database.query("INSERT INTO partners (partner_name, partner_active, user_id) values ($1, $2, $3) returning *", [req.body.name, req.body.active, newUser.rows[0].id]);
 
+        const token = jwtGenerator(newUser.rows[0].id);
+
         res.status(201).json({
             status: "success",
             data: {
                 user: newUser.rows[0],
                 partner: newPartner.rows[0],
+                token,
             },
         });
     } catch (err) {
