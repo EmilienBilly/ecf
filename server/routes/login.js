@@ -3,6 +3,7 @@ const database = require("../db");
 const jwtGenerator = require("../jwtGenerator");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const authorization = require("../middleware/authorization");
 
 router.post("/", async (req, res) => {
     try {
@@ -25,6 +26,15 @@ router.post("/", async (req, res) => {
     } catch (err) {
         console.error(err.message);
         res.status(500).send("server error");
+    }
+});
+
+router.get("/verify", authorization, async (req, res) => {
+    try {
+        res.json(true)
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Servor Error");
     }
 });
 
