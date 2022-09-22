@@ -13,9 +13,9 @@ router.get("/", authorization, async (req, res) => {
 
         if (user.rows[0].right_id !== 1) {
             return res.status(401).send("User is not admin");
+        } else {
+            res.json(user.rows[0]);
         }
-
-        res.json(user.rows[0]);
     } catch (err) {
         console.error(err.message);
         res.status(500).json("Server Error");

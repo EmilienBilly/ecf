@@ -21,20 +21,16 @@ const StructureDetails = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     return (
-        <div className="lg:flex min-h-screen bg-main-bg relative z-0 overflow-auto">
-            <div className="w-11/12 xl:w-1/2 mx-auto">
-                <div className="lg:flex-grow">
-                    <div className="ml-4">
-                        <PageTitle title={structureInfos.struct_name} />
-                    </div>
-
-                    <div className="mb-4">
-                        <p>{structureInfos.struct_address}</p>
-                        <p>{structureInfos.user_email}</p>
-                    </div>
-                    {partnerOffers && <AddStructuresOffers partnerOffers={partnerOffers} structureId={structureId} />}
-                </div>
+        <div className="lg:flex-grow">
+            <div className="ml-4">
+                <PageTitle title={structureInfos.struct_name} />
             </div>
+
+            <div className="mb-4">
+                <p>{structureInfos.struct_address}</p>
+                <p>{structureInfos.user_email}</p>
+            </div>
+            {partnerOffers && <AddStructuresOffers partnerOffers={partnerOffers} structureId={structureId} />}
         </div>
     );
 };

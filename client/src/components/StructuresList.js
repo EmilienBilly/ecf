@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const StructuresList = ({ structures }) => {
     return (
-        <div className="bg-main-bg p-4 mx-auto w-full m-4 rounded-lg">
+        <div className="p-4 mx-auto w-full m-4 rounded-lg">
             <h2 className="mb-4 text-2xl font-bold">Structures</h2>
             {structures.map((structure, index) => (
                 <Link key={index} to={`/partners/${structure.partner_id}/${structure.id}`}>

@@ -5,7 +5,7 @@ const Navbar = () => {
     const [navbar, setNavbar] = useState(false);
 
     return (
-        <nav className="w-full bg-navbar-bg shadow-2xl">
+        <nav className="w-full bg-navbar-bg">
             <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
                 <div>
                     <div className="flex items-center justify-between py-3 md:py-5 md:block">
@@ -31,7 +31,7 @@ const Navbar = () => {
                     <div className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"}`}>
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
                             <li className=" text-lg font-semibold">
-                                <Link to="/">Partenaires</Link>
+                                <Link to="/partners">Partenaires</Link>
                             </li>
                             <li className=" text-lg font-semibold">
                                 <Link to="">Structure</Link>
