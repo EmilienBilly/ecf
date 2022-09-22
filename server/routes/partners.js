@@ -42,10 +42,6 @@ router.post("/", async (req, res) => {
 // GET all the partners
 router.get("/", async (req, res) => {
     try {
-        // const user = await database.query("SELECT * FROM users WHERE id = $1;", [req.user]);
-        // if (user.rows[0].right_id !== 1) {
-        //     return res.status(401).send("User is not admin");
-        // }
         const results = await database.query("SELECT partners.*, users.user_email FROM partners INNER JOIN users ON partners.user_id = users.id;");
         res.json({
             partners: results.rows,

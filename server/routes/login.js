@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
         }
 
         //
-        const token = jwtGenerator(user.rows[0].id);
+        const token = jwtGenerator(user.rows[0].id, user.rows[0].right_id);
         res.json({ token });
     } catch (err) {
         console.error(err.message);
