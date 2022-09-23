@@ -7,7 +7,10 @@ const authorization = require("../middleware/authorization");
 
 router.get("/verify", authorization, async (req, res) => {
     try {
-        res.json(true);
+        res.json({
+            isTrue: true,
+            user_role: req.user.user_right_id,
+        });
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Servor Error");

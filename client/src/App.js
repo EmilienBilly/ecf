@@ -11,6 +11,7 @@ import axios from "./api/axios";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const setAuth = (boolean) => {
         setIsAuthenticated(boolean);
     };
@@ -19,10 +20,8 @@ function App() {
         try {
             const response = await axios.get("/login/verify", { headers: { token: localStorage.token } });
 
-            console.log(localStorage);
-
-            response.data === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
-            console.log(isAuthenticated);
+            console.log(response.data.user_role);
+            response.data.isTrue === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
         } catch (err) {
             console.error(err.message);
         }
