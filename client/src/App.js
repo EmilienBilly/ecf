@@ -7,7 +7,7 @@ import StructureDetails from "./pages/StructureDetails";
 import Navbar from "./components/Navbar";
 import Offers from "./pages/Offers";
 import Login from "./pages/Login";
-import axios from "axios";
+import axios from "./api/axios";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);

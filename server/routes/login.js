@@ -5,6 +5,16 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const authorization = require("../middleware/authorization");
 
+router.get("/verify", authorization, async (req, res) => {
+    try {
+        res.json(true);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Servor Error");
+    }
+    console.log(req.user);
+});
+
 router.post("/", async (req, res) => {
     try {
         //Check if the user email exists
@@ -26,15 +36,6 @@ router.post("/", async (req, res) => {
     } catch (err) {
         console.error(err.message);
         res.status(500).send("server error");
-    }
-});
-
-router.get("/verify", authorization, async (req, res) => {
-    try {
-        res.json(true);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send("Servor Error");
     }
 });
 
