@@ -1,5 +1,4 @@
 const OfferList = ({ offers }) => {
-    console.log(offers);
     return (
         <div className="grid grid-cols-2 gap-2">
             {offers &&

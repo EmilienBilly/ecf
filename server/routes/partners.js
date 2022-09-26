@@ -11,10 +11,6 @@ router.post("/", async (req, res) => {
         //check if user already exists
         const user = await database.query("SELECT * FROM users WHERE user_email = $1", [req.body.email]);
 
-        if (user.rows.length !== 0) {
-            return res.status(401).send("Cet utilisateur existe déjà");
-        }
-
         // using bcrypt to hash the password
         const saltRound = 10;
         const salt = await bcrypt.genSalt(saltRound);
@@ -49,6 +45,16 @@ router.get("/", async (req, res) => {
     } catch (error) {
         console.log(error);
     }
+});
+
+// get the partner linked to the user_id
+router.get("/details", async (req, res) => {
+    try {
+        const result = await database.query("SELECT * FROM partners WHERE user_id = $1;", [req.body.userId]);
+        res.status(200).json({
+            partner: result.rows[0],
+        });
+    } catch (err) {}
 });
 
 router.get("/rights", async (req, res) => {

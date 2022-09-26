@@ -5,7 +5,6 @@ const offersRouter = require("./routes/offers");
 const partnersOffersRouter = require("./routes/partners_offers");
 const structuresOffersRouter = require("./routes/structures_offers");
 const loginRouter = require("./routes/login");
-const dashboardRouter = require("./routes/dashboard");
 
 const express = require("express");
 const cors = require("cors");
@@ -18,7 +17,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/login", loginRouter);
-app.use("/dashboard", dashboardRouter);
 app.use("/partners", partnersRouter);
 app.use("/structures", structuresRouter);
 app.use("/offers", offersRouter);

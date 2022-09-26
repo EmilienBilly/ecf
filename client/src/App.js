@@ -11,7 +11,8 @@ import axios from "./api/axios";
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [isAdmin, setIsAdmin] = useState(false);
+    const [role, setRole] = useState();
+    const [userId, setUserId] = useState();
     const setAuth = (boolean) => {
         setIsAuthenticated(boolean);
     };
@@ -19,9 +20,9 @@ function App() {
     const isAuth = async () => {
         try {
             const response = await axios.get("/login/verify", { headers: { token: localStorage.token } });
-
-            console.log(response.data.user_role);
             response.data.isTrue === true ? setIsAuthenticated(true) : setIsAuthenticated(false);
+            setRole(response.data.user_role);
+            setUserId(response.data.user_id);
         } catch (err) {
             console.error(err.message);
         }
@@ -36,8 +37,8 @@ function App() {
                 <div className="lg:flex min-h-screen bg-white relative z-0 overflow-auto">
                     <div className="w-11/12 xl:w-3/4 mx-auto">
                         <Routes>
-                            <Route path="/login" element={!isAuthenticated ? <Login setAuth={setAuth} /> : <Navigate replace to="/" />} />
-                            <Route path="/" element={<Partners />} />
+                            <Route path="/login" element={!isAuthenticated ? <Login setAuth={setAuth} /> : <Navigate replace to="/partners" />} />
+                            <Route path="/partners" element={<Partners role={role} user_id={userId} />} />
                             <Route path="/partners/:id" element={<PartnerDetails />} />
                             <Route path="/partners/:partnerId/:structureId" element={<StructureDetails />} />
                             <Route path="/offers" element={<Offers />} />
