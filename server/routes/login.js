@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
 
         //
         const token = jwtGenerator(user.rows[0].id, user.rows[0].right_id);
-        res.json({ token });
+        res.json({ token, user: user.rows[0] });
     } catch (err) {
         console.error(err.message);
         res.status(500).send("server error");

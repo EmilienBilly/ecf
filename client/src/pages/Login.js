@@ -1,20 +1,22 @@
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 
 const Login = ({ setAuth }) => {
     const { handleSubmit, register } = useForm();
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
-        console.log(data);
         try {
             const response = await axios.post("/login", {
                 user_email: data.email,
                 user_password: data.password,
             });
-
             localStorage.setItem("token", response.data.token);
+            localStorage.setItem("user", JSON.stringify(response.data.user));
             setAuth(true);
             console.log(response);
+            navigate(`/user/${response.data.user.id}`);
         } catch (err) {}
     };
 

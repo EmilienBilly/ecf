@@ -47,15 +47,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-// get the partner linked to the user_id
-router.get("/details", async (req, res) => {
-    try {
-        const result = await database.query("SELECT * FROM partners WHERE user_id = $1;", [req.body.userId]);
-        res.status(200).json({
-            partner: result.rows[0],
-        });
-    } catch (err) {}
-});
+
 
 router.get("/rights", async (req, res) => {
     try {
