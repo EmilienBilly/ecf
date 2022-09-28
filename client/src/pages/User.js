@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "../api/axios";
 import OfferList from "../components/OfferList";
 import StructuresList from "../components/StructuresList";
+import PageTitle from "../components/PageTitle";
 
 const User = () => {
     const { id } = useParams();
@@ -30,13 +31,23 @@ const User = () => {
         };
         fetchOffers();
     }, [user]);
-
+    console.log(user);
     if (parsedAuthenticatedUser?.right_id === 2) {
         return (
             <>
                 {user && (
                     <div>
-                        <h1>Bienvenue sur la page de l'utilisateur {user.partner_name}</h1>
+                        <PageTitle title={user.partner_name} />
+                        <div className="flex flex-col mt-2 mb-2">
+                            <div className="flex gap-2">
+                                <p className="font-semibold">Adresse Email : </p>
+                                <p>{user.user_email}</p>
+                            </div>
+                            <div className="flex gap-2">
+                                <p className="font-semibold">Status :</p>
+                                <p>{user.partner_active ? "Actif" : "Inactif"}</p>
+                            </div>
+                        </div>
                         {partnersOffers && <OfferList offers={partnersOffers} />}
                         <StructuresList structures={structures} />
                     </div>
