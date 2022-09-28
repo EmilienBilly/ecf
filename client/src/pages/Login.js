@@ -14,8 +14,8 @@ const Login = ({ setAuth }) => {
             });
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("user", JSON.stringify(response.data.user));
-            setAuth(true);
-            console.log(response);
+            // setAuth(true);
+
             navigate(`/user/${response.data.user.id}`);
         } catch (err) {}
     };

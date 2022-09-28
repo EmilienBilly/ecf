@@ -35,14 +35,11 @@ router.post("/", async (req, res) => {
         const newUser = await database.query("INSERT INTO users (user_email, user_password, right_id) values ($1, $2, $3) returning *", [req.body.email, bcryptPassword, req.body.right_id]);
         const newStructure = await database.query("INSERT INTO structures (struct_name, struct_address, struct_active, partner_id, user_id) values ($1, $2, $3, $4, $5) returning *", [req.body.name, req.body.address, req.body.active, req.body.partner_id, newUser.rows[0].id]);
 
-        const token = jwtGenerator(newUser.rows[0].id);
-
         res.status(201).json({
             status: "success",
             data: {
                 user: newUser.rows[0],
                 structure: newStructure.rows[0],
-                token,
             },
         });
     } catch (err) {
