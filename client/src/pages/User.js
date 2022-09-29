@@ -37,7 +37,7 @@ const User = () => {
             setUserOffers(results.data.offers);
         };
         const fetchOffersStructure = async () => {
-            const results = await axios.get(`/users/structure/${user.id}/offers`);
+            const results = await axios.get(`/users/partner/${user.partner_id}/offers`);
             setUserOffers(results.data.offers);
         };
         if (parsedAuthenticatedUser.right_id === 2) {
