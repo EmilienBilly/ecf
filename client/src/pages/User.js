@@ -11,7 +11,7 @@ const User = () => {
     const parsedAuthenticatedUser = JSON.parse(authenticatedUser);
     const [user, setUser] = useState();
     const [structures, setStructures] = useState([]);
-    const [partnersOffers, setPartnersOffers] = useState();
+    const [userOffers, setUserOffers] = useState();
 
     useEffect(() => {
         const fetchDataPartner = async () => {
@@ -32,14 +32,20 @@ const User = () => {
     }, [id, parsedAuthenticatedUser.right_id]);
 
     useEffect(() => {
-        const fetchOffers = async () => {
-            const getPartnersOffers = await axios.get(`/users/${user.id}/offers`);
-            setPartnersOffers(getPartnersOffers.data.offers);
+        const fetchOffersPartner = async () => {
+            const results = await axios.get(`/users/partner/${user.id}/offers`);
+            setUserOffers(results.data.offers);
+        };
+        const fetchOffersStructure = async () => {
+            const results = await axios.get(`/users/structure/${user.id}/offers`);
+            setUserOffers(results.data.offers);
         };
         if (parsedAuthenticatedUser.right_id === 2) {
-            fetchOffers();
+            fetchOffersPartner();
+        } else {
+            fetchOffersStructure();
         }
-    }, [user, parsedAuthenticatedUser]);
+    }, [user, parsedAuthenticatedUser.right_id]);
     console.log(user);
 
     if (parsedAuthenticatedUser?.right_id === 2) {
@@ -50,7 +56,7 @@ const User = () => {
                         <PageTitle title={user.partner_name} />
                         <div className="flex flex-col mt-2 mb-2">
                             <div className="flex gap-2">
-                                <p className="font-semibold">Adresse Email : </p>
+                                <p className="font-semibold">Adresse email : </p>
                                 <p>{user.user_email}</p>
                             </div>
                             <div className="flex gap-2">
@@ -58,7 +64,7 @@ const User = () => {
                                 <p>{user.partner_active ? "Actif" : "Inactif"}</p>
                             </div>
                         </div>
-                        {partnersOffers && <OfferList offers={partnersOffers} />}
+                        {userOffers && <OfferList offers={userOffers} />}
                         <StructuresList structures={structures} />
                     </div>
                 )}
@@ -67,9 +73,30 @@ const User = () => {
     }
     return (
         <>
-            <div>
-                <h1>Structure</h1>
-            </div>
+            {user && (
+                <div>
+                    <PageTitle title={user.struct_name} />
+                    <div className="flex flex-col mt-2 mb-2">
+                        <div className="flex gap-2">
+                            <p className="font-semibold">Franchise :</p>
+                            <p>{user.partner_name}</p>
+                        </div>
+                        <div className="flex gap-2">
+                            <p className="font-semibold">Adresse email : </p>
+                            <p>{user.user_email}</p>
+                        </div>
+                        <div className="flex gap-2">
+                            <p className="font-semibold">Adresse postale : </p>
+                            <p>{user.struct_address}</p>
+                        </div>
+                        <div className="flex gap-2">
+                            <p className="font-semibold">Status :</p>
+                            <p>{user.struct_active ? "Active" : "Inactive"}</p>
+                        </div>
+                    </div>
+                    {userOffers && <OfferList offers={userOffers} />}
+                </div>
+            )}
         </>
     );
 };

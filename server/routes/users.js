@@ -34,10 +34,21 @@ router.get("/structure/:id", async (req, res) => {
     }
 });
 
-router.get("/:partnerId/offers", async (req, res) => {
+router.get("/partner/:partnerId/offers", async (req, res) => {
     try {
         const results = await database.query("SELECT partners_offers.*, offers.offer_name FROM partners_offers INNER JOIN offers ON partners_offers.offer_id = offers.id WHERE partner_id = $1;", [req.params.partnerId]);
         res.status(200).json({
+            offers: results.rows,
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+router.get("/structure/:structureId/offers", async (req, res) => {
+    try {
+        const results = await database.query("SELECT structures_offers.*, offers.offer_name FROM structures_offers INNER JOIN offers ON structures_offers.offer_id = offers.id WHERE struct_id = $1;", [req.params.structureId]);
+        res.status(201).json({
             offers: results.rows,
         });
     } catch (error) {
