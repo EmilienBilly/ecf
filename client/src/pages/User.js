@@ -14,24 +14,34 @@ const User = () => {
     const [partnersOffers, setPartnersOffers] = useState();
 
     useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get(`/users/${id}`);
+        const fetchDataPartner = async () => {
+            const response = await axios.get(`/users/partner/${id}`);
             setUser(response.data.user.infos);
             setStructures(response.data.user.structures);
         };
 
-        fetchData();
-    }, [id]);
+        const fetchDataStructure = async () => {
+            const response = await axios.get(`/users/structure/${id}`);
+            setUser(response.data.user.infos);
+        };
+        if (parsedAuthenticatedUser.right_id === 2) {
+            fetchDataPartner();
+        } else {
+            fetchDataStructure();
+        }
+    }, [id, parsedAuthenticatedUser.right_id]);
 
     useEffect(() => {
         const fetchOffers = async () => {
             const getPartnersOffers = await axios.get(`/users/${user.id}/offers`);
             setPartnersOffers(getPartnersOffers.data.offers);
-            console.log(getPartnersOffers);
         };
-        fetchOffers();
-    }, [user]);
+        if (parsedAuthenticatedUser.right_id === 2) {
+            fetchOffers();
+        }
+    }, [user, parsedAuthenticatedUser]);
     console.log(user);
+
     if (parsedAuthenticatedUser?.right_id === 2) {
         return (
             <>
@@ -58,7 +68,7 @@ const User = () => {
     return (
         <>
             <div>
-                <h1>Veuillez vous connecter</h1>
+                <h1>Structure</h1>
             </div>
         </>
     );

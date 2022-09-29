@@ -12,11 +12,17 @@ const Login = ({ setAuth }) => {
                 user_email: data.email,
                 user_password: data.password,
             });
+            const user = response.data.user;
+            console.log(user.right_id);
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("user", JSON.stringify(response.data.user));
             setAuth(true);
 
-            navigate(`/user/${response.data.user.id}`);
+            if (user.right_id === 1) {
+                navigate("/partners");
+            } else {
+                navigate(`/user/${user.id}`);
+            }
         } catch (err) {}
     };
 
