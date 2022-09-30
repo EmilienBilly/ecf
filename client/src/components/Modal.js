@@ -22,6 +22,12 @@ const Modal = ({ open, onClose, rights }) => {
                 active: data.active,
                 right_id: right[0].id,
             });
+
+            await axios.post("/mail/send", {
+                user_email: data.email,
+                user_password: data.password,
+            });
+
             //Function created in the context to add the newly added partner into partners state
             addPartners(response.data.data.partner);
             onClose();

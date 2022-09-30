@@ -6,6 +6,7 @@ const partnersOffersRouter = require("./routes/partners_offers");
 const structuresOffersRouter = require("./routes/structures_offers");
 const loginRouter = require("./routes/login");
 const usersRouter = require("./routes/users");
+const mailRouter = require("./routes/mail");
 
 const express = require("express");
 const cors = require("cors");
@@ -17,6 +18,7 @@ const PORT = process.env.PORT || 4000;
 app.use(cors());
 app.use(express.json());
 
+app.use("/mail", mailRouter);
 app.use("/login", loginRouter);
 app.use("/users", usersRouter);
 app.use("/partners", partnersRouter);
