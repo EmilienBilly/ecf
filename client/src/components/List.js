@@ -1,19 +1,14 @@
-import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "../api/axios";
-import { PartnersContext } from "../context/PartnersContext";
 
-const List = () => {
-    const { partners, setPartners } = useContext(PartnersContext);
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await axios.get("/partners");
-            setPartners(response.data.partners);
-        };
-        fetchData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
+const List = ({ partners }) => {
+    if (partners?.length === 0) {
+        return (
+            <>
+                <p className="mt-4">Aucun résultat</p>
+            </>
+        );
+    }
+    console.log(partners);
     return (
         <>
             {partners && (
