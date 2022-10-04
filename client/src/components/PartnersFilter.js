@@ -19,13 +19,13 @@ const PartnersFilter = ({ setSearchResults }) => {
     return (
         <>
             <div className="flex mt-4 mb-4 gap-2">
-                <button type="button" onClick={() => filterActive()} class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                <button type="button" onClick={() => filterActive()} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
                     Actifs
                 </button>
-                <button type="button" onClick={() => filterInactive()} class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                <button type="button" onClick={() => filterInactive()} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
                     Inactifs
                 </button>
-                <button type="button" onClick={() => filterAll()} class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+                <button type="button" onClick={() => filterAll()} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
                     Tous
                 </button>
             </div>
