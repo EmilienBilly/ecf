@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Logout from "./Logout";
 
-const Navbar = () => {
+const Navbar = ({ isAuthenticated, setAuth }) => {
     const [navbar, setNavbar] = useState(false);
 
     return (
@@ -30,15 +31,16 @@ const Navbar = () => {
                 <div>
                     <div className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"}`}>
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                            <li className=" text-lg font-semibold">
+                            <li className="text-lg font-semibold">
                                 <Link to="/partners">Partenaires</Link>
                             </li>
-                            <li className=" text-lg font-semibold">
+                            <li className="text-lg font-semibold">
                                 <Link to="">Structure</Link>
                             </li>
-                            <li className=" text-lg font-semibold">
+                            <li className="text-lg font-semibold">
                                 <Link to="/">Accueil</Link>
                             </li>
+                            {isAuthenticated === true && <Logout setAuth={setAuth} />}
                         </ul>
                     </div>
                 </div>

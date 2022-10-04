@@ -46,7 +46,6 @@ const User = () => {
             fetchOffersStructure();
         }
     }, [user, parsedAuthenticatedUser.right_id]);
-    console.log(user);
 
     if (parsedAuthenticatedUser?.right_id === 2) {
         return (

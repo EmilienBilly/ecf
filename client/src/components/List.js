@@ -8,7 +8,7 @@ const List = ({ partners }) => {
             </>
         );
     }
-    console.log(partners);
+
     return (
         <>
             {partners && (

@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
+import { toast } from "react-toastify";
 
 const Login = ({ setAuth }) => {
     const { handleSubmit, register } = useForm();
@@ -12,6 +13,7 @@ const Login = ({ setAuth }) => {
                 user_email: data.email,
                 user_password: data.password,
             });
+            toast.success("Bienvenue");
             const user = response.data.user;
             console.log(user.right_id);
             localStorage.setItem("token", response.data.token);
