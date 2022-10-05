@@ -1,5 +1,8 @@
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { PartnersContext } from "../context/PartnersContext";
+import { UserContext } from "../context/UserContext";
+import { toast } from "react-toastify";
 import List from "../components/List";
 import PageTitle from "../components/PageTitle";
 import Modal from "../components/Modal";
@@ -13,6 +16,8 @@ const Partners = () => {
     const [rights, setRights] = useState([]);
     const { partners, setPartners } = useContext(PartnersContext);
     const [searchResults, setSearchResults] = useState([]);
+    const { authUser } = useContext(UserContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchRights = async () => {
@@ -26,7 +31,14 @@ const Partners = () => {
         };
         fetchRights();
         fetchPartners();
-    }, [setPartners]);
+
+        if (authUser.right_id !== 1) {
+            navigate(`/user/${authUser.id}`);
+            toast.error("Vous n'avez pas les droits nécessaires");
+        }
+    }, [setPartners, authUser.id, authUser.right_id, navigate]);
+
+    console.log(authUser);
 
     return (
         <>

@@ -2,6 +2,7 @@ import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Partners from "./pages/Partners";
 import { PartnersContextProvider } from "./context/PartnersContext";
+import { UserContextProvider } from "./context/UserContext";
 import PartnerDetails from "./pages/PartnerDetails";
 import StructureDetails from "./pages/StructureDetails";
 import Navbar from "./components/Navbar";
@@ -32,26 +33,28 @@ function App() {
         isAuth();
     });
     return (
-        <PartnersContextProvider>
-            <BrowserRouter>
-                <Navbar isAuthenticated={isAuthenticated} setAuth={setAuth} />
-                <div className="lg:flex min-h-screen bg-white relative z-0 overflow-auto">
-                    <div className="min-h-full w-11/12 xl:w-3/4 mx-auto">
-                        <Routes>
-                            <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
-                                <Route path="/partners" element={<Partners />} />
-                                <Route path="/partners/:id/" element={<PartnerDetails />} />
-                                <Route path="/partners/:partnerId/:structureId" element={<StructureDetails />} />
-                                <Route path="/offers" element={<Offers />} />
-                                <Route path="/user/:id" element={<User />} />
-                            </Route>
-                            <Route path="/login" element={!isAuthenticated ? <Login setAuth={setAuth} /> : <Navigate replace to={"/partners"} />} />
-                        </Routes>
+        <UserContextProvider>
+            <PartnersContextProvider>
+                <BrowserRouter>
+                    <Navbar isAuthenticated={isAuthenticated} setAuth={setAuth} />
+                    <div className="lg:flex min-h-screen bg-white relative z-0 overflow-auto">
+                        <div className="min-h-full w-11/12 xl:w-3/4 mx-auto">
+                            <Routes>
+                                <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
+                                    <Route path="/partners" element={<Partners />} />
+                                    <Route path="/partners/:id/" element={<PartnerDetails />} />
+                                    <Route path="/partners/:partnerId/:structureId" element={<StructureDetails />} />
+                                    <Route path="/offers" element={<Offers />} />
+                                    <Route path="/user/:id" element={<User />} />
+                                </Route>
+                                <Route path="/login" element={!isAuthenticated ? <Login setAuth={setAuth} /> : <Navigate replace to={"/partners"} />} />
+                            </Routes>
+                        </div>
                     </div>
-                </div>
-            </BrowserRouter>
-            <ToastContainer />
-        </PartnersContextProvider>
+                </BrowserRouter>
+                <ToastContainer />
+            </PartnersContextProvider>
+        </UserContextProvider>
     );
 }
 
