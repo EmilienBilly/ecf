@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes, BrowserRouter, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Partners from "./pages/Partners";
 import { PartnersContextProvider } from "./context/PartnersContext";
@@ -45,7 +45,7 @@ function App() {
                                 <Route path="/offers" element={<Offers />} />
                                 <Route path="/user/:id" element={<User />} />
                             </Route>
-                            <Route path="/login" element={<Login setAuth={setAuth} />} />
+                            <Route path="/login" element={!isAuthenticated ? <Login setAuth={setAuth} /> : <Navigate replace to={"/partners"} />} />
                         </Routes>
                     </div>
                 </div>
