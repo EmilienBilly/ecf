@@ -1,11 +1,9 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import axios from "../api/axios";
-import { PartnersContext } from "../context/PartnersContext";
 import { useForm } from "react-hook-form";
 
-const Modal = ({ open, onClose, rights }) => {
+const Modal = ({ open, onClose, rights, searchResults, setSearchResults }) => {
     const [confirm, setConfirm] = useState(false);
-    const { addPartners } = useContext(PartnersContext);
     const {
         handleSubmit,
         register,
@@ -29,8 +27,7 @@ const Modal = ({ open, onClose, rights }) => {
                 user_password: data.password,
             });
 
-            //Function created in the context to add the newly added partner into partners state
-            addPartners(response.data.data.partner);
+            setSearchResults([...searchResults, response.data.data.partner]);
             onClose();
         } catch (err) {}
     };

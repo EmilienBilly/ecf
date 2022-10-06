@@ -31,7 +31,9 @@ function App() {
 
     useEffect(() => {
         isAuth();
+        console.log(isAuthenticated);
     });
+    
     return (
         <UserContextProvider>
             <PartnersContextProvider>

@@ -52,7 +52,7 @@ const Partners = () => {
             </div>
 
             <List partners={searchResults} setPartners={setPartners} />
-            <Modal open={openModal} rights={rights} onClose={() => setOpenModal(false)} />
+            <Modal open={openModal} rights={rights} setSearchResults={setSearchResults} searchResults={searchResults} onClose={() => setOpenModal(false)} />
         </>
     );
 };
