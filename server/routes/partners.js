@@ -47,8 +47,6 @@ router.get("/", async (req, res) => {
     }
 });
 
-
-
 router.get("/rights", async (req, res) => {
     try {
         const results = await database.query("SELECT * FROM rights WHERE right_name != 'admin'");
@@ -110,6 +108,27 @@ router.put("/:partnerId", async (req, res) => {
     } catch (err) {
         console.log(err);
     }
+});
+
+router.put("/:partnerId/status", async (req, res) => {
+    try {
+        const result = await database.query("UPDATE partners SET partner_active = $1 WHERE id = $2 returning *;", [req.body.status, req.params.partnerId]);
+        res.status(200).json({
+            status: "success",
+            partner: result.rows[0],
+        });
+
+        if (result.rows[0].partner_active === false) {
+            const partnersOffers = await database.query("UPDATE partners_offers SET offer_active = $1 WHERE partner_id = $2 returning *;", [req.body.status, req.params.partnerId]);
+
+            const structures = await database.query("UPDATE structures SET struct_active = $1 WHERE partner_id = $2 returning *;", [req.body.status, req.params.partnerId]);
+
+            return res.status(200).json({
+                partnersOffers: partnersOffers.rows[0],
+                structures: structures.rows[0],
+            });
+        }
+    } catch (err) {}
 });
 
 module.exports = router;

@@ -15,7 +15,7 @@ const PartnerDetails = () => {
     const [edit, setEdit] = useState(false);
     const [openModal, setOpenModal] = useState(false);
 
-    const [partner, setPartner] = useState([]);
+    const [partner, setPartner] = useState({});
     const [structures, setStructures] = useState([]);
     const [rights, setRights] = useState([]);
     const [offers, setOffers] = useState([]);
@@ -26,10 +26,18 @@ const PartnerDetails = () => {
         setEdit(!edit);
     };
 
+    const setStatus = async () => {
+        const response = await axios.put(`/partners/${id}/status`, {
+            status: partner.partner_active ? false : true,
+        });
+        setPartner({ ...partner, partner_active: response.data.partner.partner_active });
+        console.log(response);
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             const getPartnersOffers = await axios.get(`/partners_offers/${id}`);
-            setPartnersOffers(getPartnersOffers.data.offers);
+            setPartnersOffers(getPartnersOffers.data.partnerOffers);
 
             const getPartners = await axios.get(`/partners/${id}`);
             setPartner(getPartners.data.partner);
@@ -42,16 +50,21 @@ const PartnerDetails = () => {
             setOffers(getOffers.data.offers);
         };
         fetchData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [id]);
+    console.log(partnersOffers);
     return (
         <>
             <div className="flex justify-between">
-                <PageTitle title={partner.partner_name} />
+                <div className="flex items-center">
+                    <PageTitle title={partner.partner_name} />
+                    <button className="ml-4 bg-green-500 h-10 p-1.5 rounded-md" onClick={setStatus}>
+                        {partner.partner_active ? "Désactiver" : "Activer"}
+                    </button>
+                </div>
                 <AddButton setOpenModal={setOpenModal} title={"Ajouter une structure"} />
             </div>
             {edit ? <EditableInfos partner={partner} setPartner={setPartner} id={id} handleEditClick={handleEditClick} setEdit={setEdit} edit={edit} /> : <ReadInfos partner={partner} handleEditClick={handleEditClick} />}
-            {partnersOffers && <OfferList offers={partnersOffers} />}
+            {partnersOffers && <OfferList partnersOffers={partnersOffers} />}
             <AddOffer offers={offers} partnerId={id} setOffers={setPartnersOffers} />
             {structures && <StructuresList structures={structures} />}
 

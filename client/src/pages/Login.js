@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import { toast } from "react-toastify";
 
-const Login = ({ setAuth }) => {
+const Login = () => {
     const { handleSubmit, register } = useForm();
     const navigate = useNavigate();
 
@@ -18,7 +18,6 @@ const Login = ({ setAuth }) => {
             console.log(user.right_id);
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("user", JSON.stringify(response.data.user));
-            setAuth(true);
 
             if (user.right_id === 1) {
                 navigate("/partners");

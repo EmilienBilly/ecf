@@ -1,9 +1,9 @@
-const Logout = ({ setAuth }) => {
+const Logout = ({ setAuthorized }) => {
     const logout = (e) => {
         e.preventDefault();
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        setAuth(false);
+        setAuthorized(false);
     };
     return (
         <>

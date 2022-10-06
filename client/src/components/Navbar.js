@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import Logout from "./Logout";
 
-const Navbar = ({ isAuthenticated, setAuth }) => {
+const Navbar = ({ authorized, setAuthorized }) => {
     const [navbar, setNavbar] = useState(false);
 
     return (
@@ -40,7 +40,7 @@ const Navbar = ({ isAuthenticated, setAuth }) => {
                             <li className="text-lg font-semibold">
                                 <Link to="/">Accueil</Link>
                             </li>
-                            {isAuthenticated === true && <Logout setAuth={setAuth} />}
+                            {authorized && <Logout setAuthorized={setAuthorized} />}
                         </ul>
                     </div>
                 </div>
