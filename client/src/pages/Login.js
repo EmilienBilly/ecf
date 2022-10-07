@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import { toast } from "react-toastify";
 
-const Login = () => {
+const Login = ({ setAuthorized }) => {
     const { handleSubmit, register } = useForm();
     const navigate = useNavigate();
 
@@ -15,10 +15,9 @@ const Login = () => {
             });
             toast.success("Bienvenue");
             const user = response.data.user;
-            console.log(user.right_id);
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("user", JSON.stringify(response.data.user));
-
+            setAuthorized(true);
             if (user.right_id === 1) {
                 navigate("/partners");
             } else {
