@@ -1,7 +1,10 @@
 import axios from "../api/axios";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const NewStructureModal = ({ rights, open, onClose, structures, setStructures, partnerId }) => {
+    const [confirm, setConfirm] = useState(false);
+
     const {
         handleSubmit,
         register,
@@ -52,14 +55,32 @@ const NewStructureModal = ({ rights, open, onClose, structures, setStructures, p
                                     <option value="true">Active</option>
                                     <option value="false">Inactive</option>
                                 </select>
-                                <div className="flex justify-center">
-                                    <button className="px-4 py-2 rounded bg-emerald-700 text-white" type="submit">
-                                        Ajouter
-                                    </button>
-                                    <button className="px-4 ml-4 rounded bg-secondary-button text-white" onClick={onClose}>
-                                        Annuler
-                                    </button>
-                                </div>
+                                {confirm === true ? (
+                                    <div>
+                                        <p className="text-center">Souhaitez vous ajouter ce partenaire ?</p>
+                                        <div className="flex justify-center mt-2">
+                                            <button className="px-4 py-2 rounded bg-emerald-700 text-white" type="submit">
+                                                Confirmer
+                                            </button>
+                                            <button className="px-4 ml-4 rounded bg-secondary-button text-white" onClick={onClose}>
+                                                Annuler
+                                            </button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="flex justify-center">
+                                        <button
+                                            className="px-4 py-2 rounded bg-emerald-700 text-white"
+                                            onClick={() => {
+                                                setConfirm(true);
+                                            }}>
+                                            Ajouter
+                                        </button>
+                                        <button className="px-4 ml-4 rounded bg-secondary-button text-white" onClick={onClose}>
+                                            Annuler
+                                        </button>
+                                    </div>
+                                )}
                             </form>
                         </div>
                     </div>

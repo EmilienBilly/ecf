@@ -15,11 +15,11 @@ const StructureDetails = () => {
             setStructureInfos(response.data.structure);
 
             const getPartnersOffers = await axios.get(`/partners_offers/${partnerId}`);
-            setPartnerOffers(getPartnersOffers.data.offers);
+            setPartnerOffers(getPartnersOffers.data.partnerOffers);
+            console.log(getPartnersOffers);
         };
         fetchData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [partnerId, structureId]);
     return (
         <div className="lg:flex-grow">
             <div className="ml-4">
@@ -30,7 +30,7 @@ const StructureDetails = () => {
                 <p>{structureInfos.struct_address}</p>
                 <p>{structureInfos.user_email}</p>
             </div>
-            {partnerOffers && <AddStructuresOffers partnerOffers={partnerOffers} structureId={structureId} />}
+            <AddStructuresOffers partnerOffers={partnerOffers} structureId={structureId} />
         </div>
     );
 };

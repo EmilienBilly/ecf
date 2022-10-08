@@ -65,7 +65,7 @@ const PartnerDetails = () => {
             </div>
             {edit ? <EditableInfos partner={partner} setPartner={setPartner} id={id} handleEditClick={handleEditClick} setEdit={setEdit} edit={edit} /> : <ReadInfos partner={partner} handleEditClick={handleEditClick} />}
             {partnersOffers && <OfferList partnersOffers={partnersOffers} />}
-            <AddOffer offers={offers} partnerId={id} setOffers={setPartnersOffers} />
+            <AddOffer offers={offers} partnerId={id} partnersOffers={partnersOffers} setPartnersOffers={setPartnersOffers} />
             {structures && <StructuresList structures={structures} />}
 
             <NewStructureModal open={openModal} structures={structures} setStructures={setStructures} rights={rights} onClose={() => setOpenModal(false)} partnerId={id} />

@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import axios from "../api/axios";
 
-const AddOffer = ({ offers, partnerId, setOffers }) => {
+const AddOffer = ({ offers, partnerId, setPartnersOffers }) => {
     const { handleSubmit, register } = useForm();
 
     const onSubmit = async (data) => {
@@ -12,7 +12,7 @@ const AddOffer = ({ offers, partnerId, setOffers }) => {
                 active: true,
             });
             const getPartnersOffers = await axios.get(`/partners_offers/${partnerId}`);
-            setOffers(getPartnersOffers.data.offers);
+            setPartnersOffers(getPartnersOffers.data.partnerOffers);
         } catch (error) {
             console.log(error);
         }
