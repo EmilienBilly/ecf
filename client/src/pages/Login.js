@@ -3,9 +3,19 @@ import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import { toast } from "react-toastify";
 
-const Login = ({ setAuthorized }) => {
+const Login = ({ setAuthorized, setRole }) => {
     const { handleSubmit, register } = useForm();
     const navigate = useNavigate();
+    const navigateUser = (user) => {
+        if (user.right_id === 1) {
+            return navigate("/partners");
+        }
+        if (user.right_id === null) {
+            return null;
+        } else {
+            return navigate(`/user/${user.id}`);
+        }
+    };
 
     const onSubmit = async (data) => {
         try {
@@ -15,14 +25,11 @@ const Login = ({ setAuthorized }) => {
             });
             toast.success("Bienvenue");
             const user = response.data.user;
+            setRole(user.right_id);
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("user", JSON.stringify(response.data.user));
             setAuthorized(true);
-            if (user.right_id === 1) {
-                navigate("/partners");
-            } else {
-                navigate(`/user/${user.id}`);
-            }
+            navigateUser(user);
         } catch (err) {}
     };
 

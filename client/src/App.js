@@ -12,7 +12,6 @@ import axios from "./api/axios";
 import User from "./pages/User";
 import Unauthorized from "./pages/Unauthorized";
 import PrivateRoutes from "./pages/PrivateRoutes";
-import PublicRoutes from "./pages/PublicRoutes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminRoutes from "./pages/AdminRoutes";
@@ -46,8 +45,7 @@ function App() {
                                     <Route path="/unauthorized" element={<Unauthorized />} />
                                     <Route path="/user/:id" element={<User />} />
                                 </Route>
-                                <Route element={<PublicRoutes authorized={authorized} setAuthorized={setAuthorized} access={access} />}></Route>
-                                <Route path="/login" element={<Login setAuthorized={setAuthorized} />} />
+                                <Route path="/login" element={<Login setRole={setRole} setAuthorized={setAuthorized} />} />
                             </Routes>
                         </div>
                     </div>
