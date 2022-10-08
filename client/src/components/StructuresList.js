@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 const StructuresList = ({ structures }) => {
     return (
         <div className="mx-auto w-full m-4 rounded-lg">
-            <h2 className="mb-4 text-2xl font-bold">Structures</h2>
             <div className="flex flex-col lg:grid grid-cols-2 lg:gap-6">
                 {structures.map((structure, index) => (
                     <Link key={index} to={`/partners/${structure.partner_id}/${structure.id}`}>

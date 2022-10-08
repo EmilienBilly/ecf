@@ -31,13 +31,6 @@ const Partners = () => {
         };
         fetchRights();
         fetchPartners();
-
-        // if (authUser.right_id !== 1) {
-        //     navigate("/unauthorized");
-        //     toast.error("Vous n'avez pas les droits nécessaires", {
-        //         toastId: 1,
-        //     });
-        // }
     }, [setPartners, authUser.id, authUser.right_id, navigate]);
 
     console.log(authUser);
@@ -48,7 +41,7 @@ const Partners = () => {
                 <PageTitle title="Partenaires" />
                 <AddButton setOpenModal={setOpenModal} title={"Ajouter"} />
             </div>
-            <div className="flex justify-between items-center">
+            <div className="lg:flex gap-5">
                 <PartnersFilter partners={searchResults} setSearchResults={setSearchResults} />
                 <SearchBar partners={partners} setSearchResults={setSearchResults} />
             </div>

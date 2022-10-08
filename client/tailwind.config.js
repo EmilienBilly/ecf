@@ -4,18 +4,18 @@ module.exports = {
     theme: {
         extend: {
             backgroundColor: {
-                "main-bg": "#f9fafc",
-                "secondary-bg": "#fefefe",
+                "main-bg": "#2C3333",
+                "secondary-bg": "#395B64",
                 "green-bg": "#c1f497",
-                "light-gray": "#F7F7F7",
+                "light-gray": "#FFFBFC",
                 "half-transparent": "rgba(0, 0, 0, 0.5)",
-                "secondary-button": "#e54b4b",
-                "navbar-bg": "#fefefe",
+                "main-button": "#1A8E9E",
+                "navbar-bg": "#2C3333",
             },
 
             colors: {
-                "green-logo": "#62a72d",
-                "green-text": "#5c813d",
+                "blue-logo": "#1A8E9E",
+                "white-text": "#E7F6F2",
             },
         },
     },

@@ -56,18 +56,27 @@ const PartnerDetails = () => {
         <>
             <div className="flex justify-between">
                 <div className="flex items-center">
-                    <PageTitle title={partner.partner_name} />
-                    <button className="ml-4 bg-green-500 h-10 p-1.5 rounded-md" onClick={setStatus}>
-                        {partner.partner_active ? "Désactiver" : "Activer"}
-                    </button>
+                    <div>
+                        <PageTitle title={partner.partner_name} />
+                    </div>
+                    <div>
+                        <button className="bg-green-500 p-1.5 rounded-md" onClick={setStatus}>
+                            {partner.partner_active ? "Désactiver" : "Activer"}
+                        </button>
+                    </div>
                 </div>
-                <AddButton setOpenModal={setOpenModal} title={"Ajouter une structure"} />
             </div>
+
             {edit ? <EditableInfos partner={partner} setPartner={setPartner} id={id} handleEditClick={handleEditClick} setEdit={setEdit} edit={edit} /> : <ReadInfos partner={partner} handleEditClick={handleEditClick} />}
             {partnersOffers && <OfferList partnersOffers={partnersOffers} />}
             <AddOffer offers={offers} partnerId={id} partnersOffers={partnersOffers} setPartnersOffers={setPartnersOffers} />
-            {structures && <StructuresList structures={structures} />}
 
+            <div className="flex items-center justify-between mt-4">
+                <PageTitle title={"Structures"} />
+                <AddButton setOpenModal={setOpenModal} />
+            </div>
+
+            {structures && <StructuresList structures={structures} />}
             <NewStructureModal open={openModal} structures={structures} setStructures={setStructures} rights={rights} onClose={() => setOpenModal(false)} partnerId={id} />
         </>
     );
