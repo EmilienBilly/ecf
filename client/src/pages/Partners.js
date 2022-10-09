@@ -37,7 +37,7 @@ const Partners = () => {
 
     return (
         <>
-            <div className="flex justify-between items-center w-full">
+            <div className="flex justify-between items-center">
                 <PageTitle title="Partenaires" />
                 <AddButton setOpenModal={setOpenModal} title={"Ajouter"} />
             </div>
@@ -47,7 +47,7 @@ const Partners = () => {
             </div>
 
             <List partners={searchResults} setPartners={setPartners} />
-            <Modal open={openModal} rights={rights} setSearchResults={setSearchResults} searchResults={searchResults} onClose={() => setOpenModal(false)} />
+            <Modal open={openModal} rights={rights} setSearchResults={setSearchResults} searchResults={searchResults} setOpenModal={setOpenModal} />
         </>
     );
 };

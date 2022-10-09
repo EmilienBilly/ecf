@@ -14,7 +14,7 @@ const Navbar = ({ authorized, setAuthorized }) => {
                             <h2 className="text-4xl text-blue-logo font-bold">One Gym</h2>
                         </Link>
                         <div className="md:hidden">
-                            <button className="p-2 text-blue-logo rounded-md outline-none" onClick={() => setNavbar(!navbar)}>
+                            <button className="py-2 text-blue-logo rounded-md outline-none" onClick={() => setNavbar(!navbar)}>
                                 {navbar ? (
                                     <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                                         <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -32,13 +32,31 @@ const Navbar = ({ authorized, setAuthorized }) => {
                     <div className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"}`}>
                         <ul className="items-center justify-center text-white-text space-y-8 md:flex md:space-x-6 md:space-y-0">
                             <li className="text-lg font-semibold">
-                                <Link to="/partners">Partenaires</Link>
+                                <Link
+                                    onClick={() => {
+                                        setNavbar(false);
+                                    }}
+                                    to="/partners">
+                                    Partenaires
+                                </Link>
                             </li>
                             <li className="text-lg font-semibold">
-                                <Link to="">Structure</Link>
+                                <Link
+                                    onClick={() => {
+                                        setNavbar(false);
+                                    }}
+                                    to="">
+                                    Structure
+                                </Link>
                             </li>
                             <li className="text-lg font-semibold">
-                                <Link to="/">Accueil</Link>
+                                <Link
+                                    onClick={() => {
+                                        setNavbar(false);
+                                    }}
+                                    to="/">
+                                    Accueil
+                                </Link>
                             </li>
                             {authorized && <Logout setAuthorized={setAuthorized} />}
                         </ul>
