@@ -7,7 +7,7 @@ const Navbar = ({ authorized, setAuthorized }) => {
 
     return (
         <nav className="w-full bg-navbar-bg">
-            <div className="justify-between mx-auto lg:w-2/4 md:items-center md:flex">
+            <div className="justify-between mx-auto md:items-center md:flex">
                 <div>
                     <div className="flex items-center justify-between py-3 md:py-5 md:block">
                         <Link to="/">

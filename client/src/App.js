@@ -31,9 +31,9 @@ function App() {
         <UserContextProvider>
             <PartnersContextProvider>
                 <BrowserRouter>
-                    <Navbar authorized={authorized} setAuthorized={setAuthorized} />
                     <div className="lg:flex min-h-screen bg-main-bg relative z-0 overflow-auto">
-                        <div className="min-h-full w-11/12 lg:w-2/4 mx-auto">
+                        <div className="min-h-full w-11/12 lg:w-3/4 mx-auto">
+                            <Navbar authorized={authorized} setAuthorized={setAuthorized} />
                             <Routes>
                                 <Route element={<PrivateRoutes authorized={authorized} setAuthorized={setAuthorized} access={access} />}>
                                     <Route element={<AdminRoutes role={role} />}>

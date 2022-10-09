@@ -37,7 +37,7 @@ const Partners = () => {
 
     return (
         <>
-            <div className="flex justify-between w-full">
+            <div className="flex justify-between items-center w-full">
                 <PageTitle title="Partenaires" />
                 <AddButton setOpenModal={setOpenModal} title={"Ajouter"} />
             </div>

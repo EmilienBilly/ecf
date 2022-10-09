@@ -13,7 +13,7 @@ const List = ({ partners }) => {
         <>
             {partners && (
                 <div className="mx-auto w-full ">
-                    <div className="mx-auto w-full gap-4 lg:grid lg:grid-cols-3">
+                    <div className="mx-auto w-full gap-4 xl:grid lg:grid-cols-3">
                         {partners.map((partner, index) => (
                             <Link key={index} to={`/partners/${partner.id}`}>
                                 <div className="bg-secondary-bg  tracking-wide font-semibold shadow rounded-lg">
