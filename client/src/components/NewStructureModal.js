@@ -39,19 +39,22 @@ const NewStructureModal = ({ rights, open, onClose, structures, setStructures, p
         <>
             <div className="bg-half-transparent fixed inset-0 z-50">
                 <div className="flex h-screen justify-center items-center">
-                    <div className="flex flex-col w-80 lg:w-1/4 justify-center bg-white py-4 px-8 rounded-md">
+                    <div className="flex flex-col w-80 lg:w-1/4 justify-center bg-main-bg py-4 px-8 rounded-md">
                         <span className="text-center mb-4 font-semibold">Ajouter une structure</span>
                         <div className="flex flex-col">
-                            <form className="flex flex-col text-md" onSubmit={handleSubmit(onSubmit)}>
-                                <input className="mb-4 p-2 bg-main-bg rounded" type="text" placeholder="Nom" {...register("name", { required: true })} />
+                            <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
+                                <input className="mb-4 p-2 rounded" type="text" placeholder="Nom" {...register("name", { required: true })} />
                                 {errors.name && <p className="text-red-500">Veuillez choisir un nom</p>}
-                                <input className="mb-4 p-2 bg-main-bg rounded" type="text" placeholder="Adresse" {...register("address", { required: true })} />
+                                <input className="mb-4 p-2 rounded" type="text" placeholder="Adresse" {...register("address", { required: true })} />
                                 {errors.email && <p className="text-red-500">Veuillez choisir une adresse email</p>}
-                                <input className="mb-4 p-2 bg-main-bg rounded" type="text" placeholder="Email" {...register("email", { required: true })} />
+                                <input className="mb-4 p-2 rounded" type="text" placeholder="Email" {...register("email", { required: true })} />
                                 {errors.email && <p className="text-red-500">Veuillez choisir une adresse email</p>}
-                                <input className="mb-4 p-2 bg-main-bg rounded" type="text" placeholder="Mot de passe" {...register("password", { required: true })} />
+                                <input className="mb-4 p-2 rounded" type="text" placeholder="Mot de passe" {...register("password", { required: true })} />
                                 {errors.password && <p className="text-red-500">Veuillez choisir un mot de passe</p>}
-                                <select className="mb-4 p-2 bg-main-bg rounded" name="status" id="status-select" {...register("active")}>
+                                <select className="mb-4 p-2 rounded" name="status" id="status-select" {...register("active")}>
+                                    <option disabled selected>
+                                        Sélectionner le status
+                                    </option>
                                     <option value="true">Active</option>
                                     <option value="false">Inactive</option>
                                 </select>

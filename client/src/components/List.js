@@ -12,11 +12,11 @@ const List = ({ partners }) => {
     return (
         <>
             {partners && (
-                <div className="mx-auto w-full ">
-                    <div className="mx-auto w-full gap-4 xl:grid lg:grid-cols-3">
+                <div className="mt-8">
+                    <div className="gap-4 xl:grid lg:grid-cols-3">
                         {partners.map((partner, index) => (
                             <Link key={index} to={`/partners/${partner.id}`}>
-                                <div className="bg-secondary-bg  tracking-wide font-semibold shadow rounded-lg">
+                                <div className="bg-secondary-bg tracking-wide font-semibold shadow rounded-lg">
                                     <div className="flex flex-col text-white-text p-4 mt-3 rounded-md">
                                         <div className=" w-3/4 flex flex-col mr-4">
                                             <p className="">{partner.partner_name}</p>

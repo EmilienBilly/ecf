@@ -2,7 +2,9 @@ import { useForm } from "react-hook-form";
 import axios from "../api/axios";
 
 const AddOffer = ({ offers, partnerId, setPartnersOffers }) => {
-    const { handleSubmit, register } = useForm();
+    const { handleSubmit, register } = useForm({
+        defaultValues: {},
+    });
 
     const onSubmit = async (data) => {
         try {
@@ -18,17 +20,22 @@ const AddOffer = ({ offers, partnerId, setPartnersOffers }) => {
         }
     };
     return (
-        <form className="flex justify-between" onSubmit={handleSubmit(onSubmit)}>
-            <select className="w-2/3 lg:w-1/3 mr-2 p-2 bg-white rounded" {...register("offerId", { required: true })}>
-                {offers.map((offer, index) => (
-                    <option key={index} value={offer.id}>
-                        {offer.offer_name}
+        <form className="lg:grid grid-cols-3 gap-2" onSubmit={handleSubmit(onSubmit)}>
+            <div className="flex gap-2">
+                <select className="w-full p-2 text-sm bg-white rounded" {...register("offerId", { required: true })}>
+                    <option value="" disabled selected>
+                        Sélectionner une offre
                     </option>
-                ))}
-            </select>
-            <button className="px-4 py-2 rounded bg-emerald-700 text-white" type="submit">
-                Ajouter
-            </button>
+                    {offers.map((offer, index) => (
+                        <option key={index} value={offer.id}>
+                            {offer.offer_name}
+                        </option>
+                    ))}
+                </select>
+                <button className="px-4 py-2 rounded text-white bg-button-bg" type="submit">
+                    Ajouter
+                </button>
+            </div>
         </form>
     );
 };

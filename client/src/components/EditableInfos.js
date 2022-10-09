@@ -7,14 +7,14 @@ const EditableInfos = ({ partner, setPartner, id, setEdit, edit }) => {
     const onSubmit = async (data) => {
         console.log(data);
         try {
-            const response = await axios.put(`/partners/${id}`, {
+            await axios.put(`/partners/${id}`, {
                 name: data.name,
                 email: data.email,
                 active: data.active,
             });
+            const getPartners = await axios.get(`/partners/${id}`);
+            setPartner(getPartners.data.partner);
             setEdit(!edit);
-            setPartner(response.data.partner);
-            console.log(response);
         } catch (err) {}
     };
 
@@ -28,9 +28,18 @@ const EditableInfos = ({ partner, setPartner, id, setEdit, edit }) => {
                         <option value="true">Actif</option>
                         <option value="false">Inactif</option>
                     </select>
-                    <button className="px-4 py-2 rounded bg-emerald-700 text-white" type="submit">
-                        Modifier
-                    </button>
+                    <div className="flex gap-2">
+                        <button className="w-full py-1 rounded-md bg-button-bg text-white" type="submit">
+                            Modifier
+                        </button>
+                        <button
+                            className="w-full py-1 rounded-md bg-button-bg text-white"
+                            onClick={() => {
+                                setEdit(false);
+                            }}>
+                            Annuler
+                        </button>
+                    </div>
                 </form>
             </div>
         </>

@@ -30,6 +30,8 @@ const PartnerDetails = () => {
         const response = await axios.put(`/partners/${id}/status`, {
             status: partner.partner_active ? false : true,
         });
+        const reFetchOffers = await axios.get(`/partners_offers/${id}`);
+        setPartnersOffers(reFetchOffers.data.partnerOffers);
         setPartner({ ...partner, partner_active: response.data.partner.partner_active });
         console.log(response);
     };
@@ -60,7 +62,7 @@ const PartnerDetails = () => {
                         <PageTitle title={partner.partner_name} />
                     </div>
                     <div>
-                        <button className="bg-green-500 p-1.5 rounded-md" onClick={setStatus}>
+                        <button className="px-4 py-2 rounded text-white bg-button-bg" onClick={setStatus}>
                             {partner.partner_active ? "Désactiver" : "Activer"}
                         </button>
                     </div>
