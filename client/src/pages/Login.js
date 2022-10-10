@@ -51,7 +51,7 @@ const Login = ({ setAuthorized, setRole }) => {
                         <label htmlFor="password" className="block mb-2 text-sm font-medium text-white-text">
                             Mot de passe
                         </label>
-                        <input className="border border-gray-300 placeholder-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5" type="text" placeholder="Entrez votre mot de passe" {...register("password", { required: true })} />
+                        <input className="border border-gray-300 placeholder-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-4 p-2.5" type="password" placeholder="Entrez votre mot de passe" {...register("password", { required: true })} />
                     </div>
                     <button className="px-4 py-2 rounded-lg bg-emerald-700 text-white font-medium" type="submit">
                         Connexion

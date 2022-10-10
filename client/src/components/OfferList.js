@@ -5,7 +5,7 @@ const OfferList = ({ partnersOffers }) => {
     return (
         <>
             <PageTitle title={"Offres"} />
-            <div className="grid grid-cols-3 gap-2 mb-4">
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 mb-4">
                 {partnersOffers &&
                     partnersOffers.map((partnersOffer, index) => (
                         <div key={index} className="flex items-center justify-between mb-2 h-16 bg-secondary-bg rounded-lg shadow px-2">

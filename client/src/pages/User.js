@@ -4,15 +4,14 @@ import axios from "../api/axios";
 import OfferList from "../components/OfferList";
 import StructuresList from "../components/StructuresList";
 import PageTitle from "../components/PageTitle";
+import ReadInfos from "../components/ReadInfos";
 
-const User = () => {
+const User = ({ role }) => {
     const { id } = useParams();
-    const authenticatedUser = localStorage.getItem("user");
-    const parsedAuthenticatedUser = JSON.parse(authenticatedUser);
     const [user, setUser] = useState();
     const [structures, setStructures] = useState([]);
     const [userOffers, setUserOffers] = useState();
-
+    console.log(userOffers);
     useEffect(() => {
         const fetchDataPartner = async () => {
             const response = await axios.get(`/users/partner/${id}`);
@@ -24,12 +23,12 @@ const User = () => {
             const response = await axios.get(`/users/structure/${id}`);
             setUser(response.data.user.infos);
         };
-        if (parsedAuthenticatedUser.right_id === 2) {
+        if (role === 2) {
             fetchDataPartner();
         } else {
             fetchDataStructure();
         }
-    }, [id, parsedAuthenticatedUser.right_id]);
+    }, [id, role]);
 
     useEffect(() => {
         const fetchOffersPartner = async () => {
@@ -37,63 +36,25 @@ const User = () => {
             setUserOffers(results.data.offers);
         };
         const fetchOffersStructure = async () => {
-            const results = await axios.get(`/users/partner/${user.partner_id}/offers`);
+            const results = await axios.get(`/users/partner/${user.user_id}/offers`);
             setUserOffers(results.data.offers);
         };
-        if (parsedAuthenticatedUser.right_id === 2) {
+        if (role === 2) {
             fetchOffersPartner();
         } else {
             fetchOffersStructure();
         }
-    }, [user, parsedAuthenticatedUser.right_id]);
+    }, [user, role]);
 
-    if (parsedAuthenticatedUser?.right_id === 2) {
-        return (
-            <>
-                {user && (
-                    <div>
-                        <PageTitle title={user.partner_name} />
-                        <div className="flex flex-col mt-2 mb-2">
-                            <div className="flex gap-2">
-                                <p className="font-semibold">Adresse email : </p>
-                                <p>{user.user_email}</p>
-                            </div>
-                            <div className="flex gap-2">
-                                <p className="font-semibold">Status :</p>
-                                <p>{user.partner_active ? "Actif" : "Inactif"}</p>
-                            </div>
-                        </div>
-                        {userOffers && <OfferList offers={userOffers} />}
-                        <StructuresList structures={structures} />
-                    </div>
-                )}
-            </>
-        );
-    }
     return (
         <>
             {user && (
                 <div>
-                    <PageTitle title={user.struct_name} />
-                    <div className="flex flex-col mt-2 mb-2">
-                        <div className="flex gap-2">
-                            <p className="font-semibold">Franchise :</p>
-                            <p>{user.partner_name}</p>
-                        </div>
-                        <div className="flex gap-2">
-                            <p className="font-semibold">Adresse email : </p>
-                            <p>{user.user_email}</p>
-                        </div>
-                        <div className="flex gap-2">
-                            <p className="font-semibold">Adresse postale : </p>
-                            <p>{user.struct_address}</p>
-                        </div>
-                        <div className="flex gap-2">
-                            <p className="font-semibold">Status :</p>
-                            <p>{user.struct_active ? "Active" : "Inactive"}</p>
-                        </div>
-                    </div>
-                    {userOffers && <OfferList offers={userOffers} />}
+                    <PageTitle title={user.partner_name} />
+                    {user && <ReadInfos partner={user} role={role} />}
+                    {userOffers && <OfferList partnersOffers={userOffers} />}
+                    <PageTitle title={"Structures"} />
+                    <StructuresList structures={structures} />
                 </div>
             )}
         </>

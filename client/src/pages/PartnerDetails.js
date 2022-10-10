@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 import axios from "../api/axios";
 import AddButton from "../components/AddButton";
 import AddOffer from "../components/AddOffer";
@@ -21,6 +21,8 @@ const PartnerDetails = () => {
     const [offers, setOffers] = useState([]);
     const [partnersOffers, setPartnersOffers] = useState([]);
 
+    const role = useOutletContext();
+
     const handleEditClick = (e, edit) => {
         e.preventDefault();
         setEdit(!edit);
@@ -33,7 +35,6 @@ const PartnerDetails = () => {
         const reFetchOffers = await axios.get(`/partners_offers/${id}`);
         setPartnersOffers(reFetchOffers.data.partnerOffers);
         setPartner({ ...partner, partner_active: response.data.partner.partner_active });
-        console.log(response);
     };
 
     useEffect(() => {
@@ -62,14 +63,14 @@ const PartnerDetails = () => {
                         <PageTitle title={partner.partner_name} />
                     </div>
                     <div>
-                        <button className="px-4 py-2 rounded text-white bg-button-bg" onClick={setStatus}>
+                        <button className="p-1 rounded text-sm text-white bg-button-bg" onClick={setStatus}>
                             {partner.partner_active ? "Désactiver" : "Activer"}
                         </button>
                     </div>
                 </div>
             </div>
 
-            {edit ? <EditableInfos partner={partner} setPartner={setPartner} id={id} handleEditClick={handleEditClick} setEdit={setEdit} edit={edit} /> : <ReadInfos partner={partner} handleEditClick={handleEditClick} />}
+            {edit ? <EditableInfos partner={partner} setPartner={setPartner} id={id} handleEditClick={handleEditClick} setEdit={setEdit} edit={edit} /> : <ReadInfos partner={partner} handleEditClick={handleEditClick} role={role} />}
             {partnersOffers && <OfferList partnersOffers={partnersOffers} />}
             <AddOffer offers={offers} partnerId={id} partnersOffers={partnersOffers} setPartnersOffers={setPartnersOffers} />
 

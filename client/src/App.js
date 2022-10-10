@@ -43,7 +43,7 @@ function App() {
                                         <Route path="/offers" element={<Offers />} />
                                     </Route>
                                     <Route path="/unauthorized" element={<Unauthorized />} />
-                                    <Route path="/user/:id" element={<User />} />
+                                    <Route path="/user/:id" element={<User role={role} />} />
                                 </Route>
                                 <Route path="/login" element={<Login setRole={setRole} setAuthorized={setAuthorized} />} />
                             </Routes>

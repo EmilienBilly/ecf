@@ -58,7 +58,7 @@ const Navbar = ({ authorized, setAuthorized }) => {
                                     Accueil
                                 </Link>
                             </li>
-                            {authorized && <Logout setAuthorized={setAuthorized} />}
+                            {authorized && <Logout setAuthorized={setAuthorized} setNavbar={setNavbar} />}
                         </ul>
                     </div>
                 </div>
