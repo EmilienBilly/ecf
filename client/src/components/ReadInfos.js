@@ -10,6 +10,7 @@ const ReadInfos = ({ role, partner, handleEditClick }) => {
                     </div>
                 </div>
                 <div>
+                    {/* if the user is admin show the edit button, else remove it */}
                     {role === 1 ? (
                         <button className="text-white" type="button" onClick={(e) => handleEditClick(e)}>
                             <svg width="22" height="22" viewBox="0 0 24 24">
