@@ -54,7 +54,7 @@ const User = ({ role }) => {
                     {user && <ReadInfos partner={user} role={role} />}
                     {userOffers && <OfferList partnersOffers={userOffers} />}
                     <PageTitle title={"Structures"} />
-                    <StructuresList structures={structures} />
+                    <StructuresList structures={structures} role={role} />
                 </div>
             )}
         </>

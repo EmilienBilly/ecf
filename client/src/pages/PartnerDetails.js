@@ -58,12 +58,10 @@ const PartnerDetails = () => {
     return (
         <>
             <div className="flex justify-between">
-                <div className="flex items-center">
+                <div className="flex items-center gap-6">
+                    <PageTitle title={partner.partner_name} />
                     <div>
-                        <PageTitle title={partner.partner_name} />
-                    </div>
-                    <div>
-                        <button className="p-1 rounded text-sm text-white bg-button-bg" onClick={setStatus}>
+                        <button className={`mt-2 p-1 rounded text-sm text-white ${partner.partner_active ? "bg-inactive-bg" : "bg-emerald-500"}`} onClick={setStatus}>
                             {partner.partner_active ? "Désactiver" : "Activer"}
                         </button>
                     </div>
@@ -79,7 +77,7 @@ const PartnerDetails = () => {
                 <AddButton setOpenModal={setOpenModal} />
             </div>
 
-            {structures && <StructuresList structures={structures} />}
+            {structures && <StructuresList structures={structures} role={role} />}
             <NewStructureModal open={openModal} structures={structures} setStructures={setStructures} rights={rights} onClose={() => setOpenModal(false)} partnerId={id} />
         </>
     );

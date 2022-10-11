@@ -6,7 +6,7 @@ const Navbar = ({ authorized, setAuthorized }) => {
     const [navbar, setNavbar] = useState(false);
 
     return (
-        <nav className="w-full bg-navbar-bg">
+        <nav className="w-full bg-navbar-bg mb-12">
             <div className="justify-between mx-auto md:items-center md:flex">
                 <div>
                     <div className="flex items-center justify-between py-3 md:py-5 md:block">
