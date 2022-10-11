@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useOutlet, useOutletContext } from "react-router-dom";
+import { useOutletContext } from "react-router-dom";
 import axios from "../api/axios";
 import PageTitle from "./PageTitle";
 
