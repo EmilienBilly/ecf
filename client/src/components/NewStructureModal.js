@@ -60,7 +60,7 @@ const NewStructureModal = ({ rights, open, onClose, structures, setStructures, p
                                 </select>
                                 {confirm === true ? (
                                     <div>
-                                        <p className="text-center">Souhaitez vous ajouter ce partenaire ?</p>
+                                        <p className="text-center">Souhaitez vous ajouter cette nouvelle structure ?</p>
                                         <div className="flex justify-center mt-2">
                                             <button className="px-4 py-2 rounded bg-emerald-700 text-white" type="submit">
                                                 Confirmer

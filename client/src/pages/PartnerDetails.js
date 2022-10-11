@@ -9,11 +9,13 @@ import OfferList from "../components/OfferList";
 import PageTitle from "../components/PageTitle";
 import ReadInfos from "../components/ReadInfos";
 import StructuresList from "../components/StructuresList";
+import ConfirmModal from "../components/ConfirmModal";
 
 const PartnerDetails = () => {
     const { id } = useParams();
     const [edit, setEdit] = useState(false);
     const [openModal, setOpenModal] = useState(false);
+    const [openConfirmModal, setOpenConfirmModal] = useState(false);
 
     const [partner, setPartner] = useState({});
     const [structures, setStructures] = useState([]);
@@ -35,6 +37,7 @@ const PartnerDetails = () => {
         const reFetchOffers = await axios.get(`/partners_offers/${id}`);
         setPartnersOffers(reFetchOffers.data.partnerOffers);
         setPartner({ ...partner, partner_active: response.data.partner.partner_active });
+        setOpenConfirmModal(false);
     };
 
     useEffect(() => {
@@ -54,14 +57,14 @@ const PartnerDetails = () => {
         };
         fetchData();
     }, [id]);
-    console.log(partnersOffers);
+
     return (
         <>
             <div className="flex justify-between">
                 <div className="flex items-center gap-6">
                     <PageTitle title={partner.partner_name} />
                     <div>
-                        <button className={`mt-2 p-1 rounded text-sm text-white ${partner.partner_active ? "bg-inactive-bg" : "bg-emerald-500"}`} onClick={setStatus}>
+                        <button className={`mt-2 p-1 rounded text-sm text-white ${partner.partner_active ? "bg-inactive-bg" : "bg-emerald-500"}`} onClick={() => setOpenConfirmModal(true)}>
                             {partner.partner_active ? "Désactiver" : "Activer"}
                         </button>
                     </div>
@@ -79,6 +82,7 @@ const PartnerDetails = () => {
 
             {structures && <StructuresList structures={structures} role={role} />}
             <NewStructureModal open={openModal} structures={structures} setStructures={setStructures} rights={rights} onClose={() => setOpenModal(false)} partnerId={id} />
+            <ConfirmModal open={openConfirmModal} onClose={() => setOpenConfirmModal(false)} setStatus={setStatus} />
         </>
     );
 };

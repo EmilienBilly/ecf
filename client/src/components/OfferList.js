@@ -1,7 +1,6 @@
 import PageTitle from "./PageTitle";
 
 const OfferList = ({ partnersOffers }) => {
-    console.log(partnersOffers);
     return (
         <>
             <PageTitle title={"Offres"} />
