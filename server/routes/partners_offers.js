@@ -25,4 +25,15 @@ router.get("/:partnerId", async (req, res) => {
     }
 });
 
+router.put("/:partnerId/:offerId", async (req, res) => {
+    try {
+        const results = await database.query("UPDATE partners_offers SET offer_active = $1 WHERE id = $2 returning *;", [req.body.status, req.params.offerId]);
+        res.status(201).json({
+            offer: results.rows[0],
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
+
 module.exports = router;

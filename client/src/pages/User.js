@@ -52,7 +52,7 @@ const User = ({ role }) => {
                 <div>
                     <PageTitle title={user.partner_name} />
                     {user && <ReadInfos partner={user} role={role} />}
-                    {userOffers && <OfferList partnersOffers={userOffers} />}
+                    {userOffers && <OfferList partnersOffers={userOffers} role={role} />}
                     <PageTitle title={"Structures"} />
                     <StructuresList structures={structures} role={role} />
                 </div>
