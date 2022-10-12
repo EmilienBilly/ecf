@@ -6,8 +6,10 @@ import PageTitle from "./PageTitle";
 const OfferList = ({ partnersOffers, id, setPartnersOffers }) => {
     const role = useOutletContext();
     const [offer, setOffer] = useState();
+    //state used to store the offer id on which the user clicked to edit
     const [editOfferId, setEditOfferId] = useState(null);
 
+    //change offer_status to active or inactive
     const updateStatus = async (offerId) => {
         try {
             const response = await axios.put(`/partners_offers/${id}/${offerId}`, {
@@ -31,7 +33,7 @@ const OfferList = ({ partnersOffers, id, setPartnersOffers }) => {
             setEditOfferId(null);
         }
     };
-    console.log(editOfferId);
+
     return (
         <>
             <PageTitle title={"Offres"} />
@@ -57,6 +59,7 @@ const OfferList = ({ partnersOffers, id, setPartnersOffers }) => {
                                             />
                                         </svg>
                                     </button>
+                                    {/* Display the button if the state previously updated by clicking on the edit button is equal to the offer id so that it doesn't appear on every offer*/}
                                     {editOfferId === partnersOffer.id ? (
                                         <button
                                             className={`p-1 rounded text-sm text-white ${partnersOffer.offer_active ? "bg-inactive-bg" : "bg-emerald-500"}`}

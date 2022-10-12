@@ -5,10 +5,12 @@ const NotAdmin = () => {
 
     const goBack = () => navigate(-1);
     return (
-        <div className="">
-            <h1>Utilisateur non autorisé</h1>
-            <p>Vous n'avez pas les droits néscessaires pour accéder à cette page</p>
-            <button onClick={goBack}>Page précédente</button>
+        <div className="flex flex-col items-center gap-2 text-white-text">
+            <h1 className="text-2xl mb-4">Utilisateur non autorisé</h1>
+            <p className="text-center">Vous n'avez pas les droits néscessaires pour accéder à cette page</p>
+            <button className="bg-button-bg p-2 rounded-md" onClick={goBack}>
+                Page précédente
+            </button>
         </div>
     );
 };

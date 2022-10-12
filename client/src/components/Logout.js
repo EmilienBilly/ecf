@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 const Logout = ({ setAuthorized, setNavbar }) => {
     const logout = (e) => {
         e.preventDefault();
@@ -5,6 +7,7 @@ const Logout = ({ setAuthorized, setNavbar }) => {
         localStorage.removeItem("user");
         setAuthorized(false);
         setNavbar(false);
+        toast.success("Déconnexion réussie");
     };
     return (
         <>
