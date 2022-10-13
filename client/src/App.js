@@ -23,7 +23,6 @@ function App() {
     //Verifying if the token is still valid in the backend
     const access = async (token) => {
         const response = await axios.get("/login/verify", { headers: { token: localStorage.token } });
-        console.log(response);
         setRole(response.data.user_role);
     };
 

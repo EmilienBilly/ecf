@@ -71,7 +71,7 @@ const PartnerDetails = () => {
                 </div>
             </div>
 
-            {edit ? <EditableInfos partner={partner} setPartner={setPartner} id={id} handleEditClick={handleEditClick} setEdit={setEdit} edit={edit} /> : <ReadInfos partner={partner} handleEditClick={handleEditClick} role={role} />}
+            {edit ? <EditableInfos partner={partner} setPartner={setPartner} id={id} setEdit={setEdit} edit={edit} /> : <ReadInfos partner={partner} handleEditClick={handleEditClick} role={role} />}
             {partnersOffers && <OfferList partnersOffers={partnersOffers} role={role} id={id} setPartnersOffers={setPartnersOffers} />}
             <AddOffer offers={offers} partnerId={id} partnersOffers={partnersOffers} setPartnersOffers={setPartnersOffers} />
 

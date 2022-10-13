@@ -30,7 +30,9 @@ const NewStructureModal = ({ rights, open, onClose, structures, setStructures, p
                 user_password: data.password,
             });
             onClose();
-        } catch (err) {}
+        } catch (err) {
+            console.log(err.message);
+        }
     };
 
     if (!open) return null;
@@ -60,12 +62,12 @@ const NewStructureModal = ({ rights, open, onClose, structures, setStructures, p
                                 </select>
                                 {confirm === true ? (
                                     <div>
-                                        <p className="text-center">Souhaitez vous ajouter cette nouvelle structure ?</p>
-                                        <div className="flex justify-center mt-2">
+                                        <p className="text-center text-white-text">Souhaitez vous ajouter cette nouvelle structure ?</p>
+                                        <div className="flex justify-center mt-4">
                                             <button className="px-4 py-2 rounded bg-emerald-700 text-white" type="submit">
                                                 Confirmer
                                             </button>
-                                            <button className="px-4 ml-4 rounded bg-secondary-button text-white" onClick={onClose}>
+                                            <button className="px-4 ml-4 rounded bg-inactive-bg text-white" onClick={onClose}>
                                                 Annuler
                                             </button>
                                         </div>
@@ -79,7 +81,7 @@ const NewStructureModal = ({ rights, open, onClose, structures, setStructures, p
                                             }}>
                                             Ajouter
                                         </button>
-                                        <button className="px-4 ml-4 rounded bg-secondary-button text-white" onClick={onClose}>
+                                        <button className="px-4 ml-4 rounded bg-inactive-bg text-white" onClick={onClose}>
                                             Annuler
                                         </button>
                                     </div>

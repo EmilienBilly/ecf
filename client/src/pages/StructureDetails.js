@@ -2,17 +2,25 @@ import { useState, useEffect } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import PageTitle from "../components/PageTitle";
 import axios from "../api/axios";
+import ReadInfoStructure from "../components/ReadInfoStructure";
+import EditInfoStructure from "../components/EditInfoStructure";
 
 const StructureDetails = () => {
     const role = useOutletContext();
+    const [edit, setEdit] = useState(false);
     const { partnerId, structureId } = useParams();
-    const [structureInfos, setStructureInfos] = useState([]);
+    const [structure, setStructure] = useState([]);
     const [partnersOffers, setPartnersOffers] = useState([]);
-    console.log(partnersOffers);
+
+    const handleEditClick = (e, edit) => {
+        e.preventDefault();
+        setEdit(!edit);
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             const response = await axios.get(`/structures/${structureId}`);
-            setStructureInfos(response.data.structure);
+            setStructure(response.data.structure);
 
             const getPartnersOffers = await axios.get(`/partners_offers/${partnerId}`);
             setPartnersOffers(getPartnersOffers.data.partnerOffers);
@@ -22,12 +30,9 @@ const StructureDetails = () => {
     }, [partnerId, structureId]);
     return (
         <div className="lg:flex-grow">
-            <PageTitle title={structureInfos.struct_name} />
+            <PageTitle title={structure.struct_name} />
+            {edit ? <EditInfoStructure structure={structure} setStructure={setStructure} handleEditClick={handleEditClick} setEdit={setEdit} edit={edit} /> : <ReadInfoStructure structure={structure} role={role} handleEditClick={handleEditClick} />}
 
-            <div className="mb-4">
-                <p>{structureInfos.struct_address}</p>
-                <p>{structureInfos.user_email}</p>
-            </div>
             <PageTitle title={"Offres"} />
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 mb-4">
                 {partnersOffers &&

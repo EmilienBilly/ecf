@@ -47,4 +47,18 @@ router.post("/", async (req, res) => {
     }
 });
 
+router.put("/:structureId", async (req, res) => {
+    try {
+        const structureResults = await database.query("UPDATE structures SET struct_name = $1, struct_active = $2 WHERE id = $3 returning *;", [req.body.name, req.body.active, req.params.structureId]);
+        const userResults = await database.query("UPDATE users SET user_email = $1 WHERE id = $2 returning *;", [req.body.email, structureResults.rows[0].user_id]);
+        res.status(200).json({
+            status: "success",
+            structure: structureResults.rows[0],
+            user: userResults.rows[0],
+        });
+    } catch (err) {
+        console.log(err);
+    }
+});
+
 module.exports = router;

@@ -1,20 +1,20 @@
 import { useForm } from "react-hook-form";
 import axios from "../api/axios";
 
-const EditableInfos = ({ partner, setPartner, id, setEdit, edit }) => {
+const EditInfoStructure = ({ structure, setStructure, setEdit, edit }) => {
     const { handleSubmit, register } = useForm();
-    console.log(partner);
+    console.log(structure);
 
     const onSubmit = async (data) => {
         console.log(data);
         try {
-            await axios.put(`/partners/${id}`, {
+            await axios.put(`/structures/${structure.id}`, {
                 name: data.name,
                 email: data.email,
-                active: partner.partner_active,
+                active: structure.struct_active,
             });
-            const getPartners = await axios.get(`/partners/${id}`);
-            setPartner(getPartners.data.partner);
+            const getStructure = await axios.get(`/structures/${structure.id}`);
+            setStructure(getStructure.data.structure);
             setEdit(!edit);
         } catch (err) {}
     };
@@ -23,8 +23,8 @@ const EditableInfos = ({ partner, setPartner, id, setEdit, edit }) => {
         <>
             <div className="mb-4">
                 <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
-                    <input required className="w-full border-gray-200 rounded-lg shadow-sm" type="text" defaultValue={partner.partner_name} placeholder="Nom" {...register("name", { required: true })} />
-                    <input className="w-full border-gray-200 rounded-lg shadow-sm" type="email" defaultValue={partner.user_email} placeholder="Email" {...register("email", { required: true })} />
+                    <input required className="w-full border-gray-200 rounded-lg shadow-sm" type="text" defaultValue={structure.struct_name} placeholder="Nom" {...register("name", { required: true })} />
+                    <input className="w-full border-gray-200 rounded-lg shadow-sm" type="email" defaultValue={structure.user_email} placeholder="Email" {...register("email", { required: true })} />
                     <div className="flex gap-2">
                         <button className="w-full py-1 rounded-md bg-button-bg text-white" type="submit">
                             Modifier
@@ -43,4 +43,4 @@ const EditableInfos = ({ partner, setPartner, id, setEdit, edit }) => {
     );
 };
 
-export default EditableInfos;
+export default EditInfoStructure;
