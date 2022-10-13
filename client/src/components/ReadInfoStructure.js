@@ -4,12 +4,13 @@ const ReadInfoStructure = ({ role, structure, handleEditClick }) => {
             <div className="flex justify-between xl:w-1/3 mb-8 bg-secondary-bg rounded-md shadow-sm py-4 px-3">
                 <div className="flex flex-col gap-2 text-white text-sm lg:text-lg">
                     <p>Adresse email : {structure.user_email}</p>
+                    <p>Adresse postale : {structure.struct_address}</p>
                     <div className="flex items-center gap-2">
-                        <p>Status : {structure.struct_active ? "Actif" : "Inactif"}</p>
+                        <p>Status : {structure.struct_active ? "Active" : "Inactive"}</p>
                         <div className={`rounded-full h-2.5 w-2.5 ${structure.struct_active ? "bg-emerald-700" : "bg-inactive-bg"}`}></div>
                     </div>
                 </div>
-                <div>
+                <div className="flex items-end">
                     {/* if the user is admin show the edit button, else remove it */}
                     {role === 1 ? (
                         <button className="text-white" type="button" onClick={(e) => handleEditClick(e)}>

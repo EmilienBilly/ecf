@@ -4,6 +4,7 @@ import PageTitle from "../components/PageTitle";
 import axios from "../api/axios";
 import ReadInfoStructure from "../components/ReadInfoStructure";
 import EditInfoStructure from "../components/EditInfoStructure";
+import ConfirmModal from "../components/ConfirmModal";
 
 const StructureDetails = () => {
     const role = useOutletContext();
@@ -11,10 +12,20 @@ const StructureDetails = () => {
     const { partnerId, structureId } = useParams();
     const [structure, setStructure] = useState([]);
     const [partnersOffers, setPartnersOffers] = useState([]);
+    const [openConfirmModal, setOpenConfirmModal] = useState(false);
 
     const handleEditClick = (e, edit) => {
         e.preventDefault();
         setEdit(!edit);
+    };
+
+    const setStatus = async () => {
+        await axios.put(`/structures/${structure.id}/status`, {
+            status: structure.struct_active ? false : true,
+        });
+        const response = await axios.get(`/structures/${structureId}`);
+        setStructure(response.data.structure);
+        setOpenConfirmModal(false);
     };
 
     useEffect(() => {
@@ -29,8 +40,17 @@ const StructureDetails = () => {
         fetchData();
     }, [partnerId, structureId]);
     return (
-        <div className="lg:flex-grow">
-            <PageTitle title={structure.struct_name} />
+        <>
+            <div className="flex justify-between">
+                <div className="flex items-center gap-6">
+                    <PageTitle title={structure.struct_name} />
+                    <div>
+                        <button className={`mt-2 p-1 rounded text-sm text-white ${structure.struct_active ? "bg-inactive-bg" : "bg-emerald-500"}`} onClick={() => setOpenConfirmModal(true)}>
+                            {structure.struct_active ? "Désactiver" : "Activer"}
+                        </button>
+                    </div>
+                </div>
+            </div>
             {edit ? <EditInfoStructure structure={structure} setStructure={setStructure} handleEditClick={handleEditClick} setEdit={setEdit} edit={edit} /> : <ReadInfoStructure structure={structure} role={role} handleEditClick={handleEditClick} />}
 
             <PageTitle title={"Offres"} />
@@ -45,7 +65,8 @@ const StructureDetails = () => {
                         </div>
                     ))}
             </div>
-        </div>
+            <ConfirmModal open={openConfirmModal} onClose={() => setOpenConfirmModal(false)} setStatus={setStatus} />
+        </>
     );
 };
 

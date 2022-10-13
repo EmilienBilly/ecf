@@ -10,6 +10,7 @@ const EditInfoStructure = ({ structure, setStructure, setEdit, edit }) => {
         try {
             await axios.put(`/structures/${structure.id}`, {
                 name: data.name,
+                address: data.address,
                 email: data.email,
                 active: structure.struct_active,
             });
@@ -25,6 +26,7 @@ const EditInfoStructure = ({ structure, setStructure, setEdit, edit }) => {
                 <form className="flex flex-col gap-3" onSubmit={handleSubmit(onSubmit)}>
                     <input required className="w-full border-gray-200 rounded-lg shadow-sm" type="text" defaultValue={structure.struct_name} placeholder="Nom" {...register("name", { required: true })} />
                     <input className="w-full border-gray-200 rounded-lg shadow-sm" type="email" defaultValue={structure.user_email} placeholder="Email" {...register("email", { required: true })} />
+                    <input className="w-full border-gray-200 rounded-lg shadow-sm" type="text" defaultValue={structure.struct_address} placeholder="Adresse postale" {...register("address", { required: true })} />
                     <div className="flex gap-2">
                         <button className="w-full py-1 rounded-md bg-button-bg text-white" type="submit">
                             Modifier
