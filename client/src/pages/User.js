@@ -9,6 +9,7 @@ import ReadInfos from "../components/ReadInfos";
 const User = ({ role }) => {
     const { id } = useParams();
     const [user, setUser] = useState();
+    console.log(user);
     const [structures, setStructures] = useState([]);
     const [userOffers, setUserOffers] = useState();
     console.log(userOffers);
@@ -36,7 +37,7 @@ const User = ({ role }) => {
             setUserOffers(results.data.offers);
         };
         const fetchOffersStructure = async () => {
-            const results = await axios.get(`/users/partner/${user.user_id}/offers`);
+            const results = await axios.get(`/users/partner/${user.partner_id}/offers`);
             setUserOffers(results.data.offers);
         };
         if (role === 2) {
@@ -53,8 +54,12 @@ const User = ({ role }) => {
                     <PageTitle title={user.partner_name} />
                     {user && <ReadInfos partner={user} role={role} />}
                     {userOffers && <OfferList partnersOffers={userOffers} role={role} />}
-                    <PageTitle title={"Structures"} />
-                    <StructuresList structures={structures} role={role} />
+                    {role === 2 ? (
+                        <>
+                            <PageTitle title={"Structures"} />
+                            <StructuresList structures={structures} role={role} />
+                        </>
+                    ) : null}
                 </div>
             )}
         </>
