@@ -16,7 +16,7 @@ const Login = ({ setAuthorized, setRole }) => {
     const navigate = useNavigate();
     const navigateUser = (user) => {
         if (user.right_id === 1) {
-            return navigate("/partners");
+            return navigate("/");
         }
         if (user.right_id === null) {
             return null;

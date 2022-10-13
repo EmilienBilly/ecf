@@ -37,7 +37,7 @@ function App() {
                             <Routes>
                                 <Route element={<PrivateRoutes authorized={authorized} setAuthorized={setAuthorized} access={access} />}>
                                     <Route element={<AdminRoutes role={role} />}>
-                                        <Route path="/partners" element={<Partners />} />
+                                        <Route path="/" element={<Partners />} />
                                         <Route path="/partners/:id/" element={<PartnerDetails />} />
                                         <Route path="/partners/:partnerId/:structureId" element={<StructureDetails />} />
                                         <Route path="/offers" element={<Offers />} />

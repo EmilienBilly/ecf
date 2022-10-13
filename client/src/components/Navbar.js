@@ -36,7 +36,7 @@ const Navbar = ({ authorized, setAuthorized }) => {
                                     onClick={() => {
                                         setNavbar(false);
                                     }}
-                                    to="/partners">
+                                    to="/">
                                     Partenaires
                                 </Link>
                             </li>

@@ -11,7 +11,7 @@ const AddOffer = ({ offers, partnerId, setPartnersOffers }) => {
             await axios.post("/partners_offers", {
                 offer_id: data.offerId,
                 partner_id: partnerId,
-                active: true,
+                active: false,
             });
             const getPartnersOffers = await axios.get(`/partners_offers/${partnerId}`);
             setPartnersOffers(getPartnersOffers.data.partnerOffers);
