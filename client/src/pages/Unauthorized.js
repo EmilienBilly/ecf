@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-const NotAdmin = () => {
+const Unauthorized = () => {
     const navigate = useNavigate();
 
     const goBack = () => navigate(-1);
@@ -14,4 +14,4 @@ const NotAdmin = () => {
         </div>
     );
 };
-export default NotAdmin;
+export default Unauthorized;
