@@ -45,17 +45,8 @@ const Navbar = ({ authorized, setAuthorized }) => {
                                     onClick={() => {
                                         setNavbar(false);
                                     }}
-                                    to="">
-                                    Structure
-                                </Link>
-                            </li>
-                            <li className="text-lg font-semibold">
-                                <Link
-                                    onClick={() => {
-                                        setNavbar(false);
-                                    }}
-                                    to="/">
-                                    Accueil
+                                    to="/offers">
+                                    Offres
                                 </Link>
                             </li>
                             {authorized && <Logout setAuthorized={setAuthorized} setNavbar={setNavbar} />}

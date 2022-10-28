@@ -46,7 +46,7 @@ const Partners = () => {
                 <SearchBar partners={partners} setSearchResults={setSearchResults} />
             </div>
 
-            <List partners={searchResults} setPartners={setPartners} />
+            <List partners={searchResults} />
             <Modal open={openModal} rights={rights} setSearchResults={setSearchResults} searchResults={searchResults} setOpenModal={setOpenModal} />
         </>
     );

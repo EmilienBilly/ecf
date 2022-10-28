@@ -2,9 +2,20 @@ const express = require("express");
 const database = require("../db");
 const bcrypt = require("bcrypt");
 const jwtGenerator = require("../jwtGenerator");
-const authorization = require("../middleware/authorization");
 
 const router = express.Router();
+
+// GET all the partners
+router.get("/", async (req, res) => {
+    try {
+        const results = await database.query("SELECT partners.*, users.user_email FROM partners INNER JOIN users ON partners.user_id = users.id;");
+        res.json({
+            partners: results.rows,
+        });
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 router.post("/", async (req, res) => {
     try {
@@ -32,18 +43,6 @@ router.post("/", async (req, res) => {
         });
     } catch (err) {
         console.log(err);
-    }
-});
-
-// GET all the partners
-router.get("/", async (req, res) => {
-    try {
-        const results = await database.query("SELECT partners.*, users.user_email FROM partners INNER JOIN users ON partners.user_id = users.id;");
-        res.json({
-            partners: results.rows,
-        });
-    } catch (error) {
-        console.log(error);
     }
 });
 

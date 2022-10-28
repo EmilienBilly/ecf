@@ -9,9 +9,9 @@ const usersRouter = require("./routes/users");
 const mailRouter = require("./routes/mail");
 
 const express = require("express");
+const app = express();
 const cors = require("cors");
 
-const app = express();
 const PORT = process.env.PORT || 4000;
 
 // middleware
