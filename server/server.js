@@ -15,7 +15,11 @@ const cors = require("cors");
 const PORT = process.env.PORT || 4000;
 
 // middleware
-app.use(cors());
+app.use(
+    cors({
+        origin: "https://onegym.netlify.app",
+    })
+);
 app.use(express.json());
 
 app.use("/mail", mailRouter);
