@@ -25,10 +25,12 @@ const NewStructureModal = ({ rights, open, onClose, structures, setStructures, p
                 partner_id: partnerId,
             });
             setStructures([...structures, response.data.data.structure]);
-            await axios.post("/mail/send", {
-                user_email: data.email,
-                user_password: data.password,
-            });
+
+            // await axios.post("/mail/send", {
+            //     user_email: data.email,
+            //     user_password: data.password,
+            // });
+
             onClose();
         } catch (err) {
             console.log(err.message);

@@ -28,10 +28,10 @@ const Modal = ({ open, setOpenModal, rights, searchResults, setSearchResults }) 
                 right_id: right[0].id,
             });
 
-            await axios.post("/mail/send", {
-                user_email: data.email,
-                user_password: data.password,
-            });
+            // await axios.post("/mail/send", {
+            //     user_email: data.email,
+            //     user_password: data.password,
+            // });
 
             setSearchResults([...searchResults, response.data.data.partner]);
             onClose();
